@@ -1,0 +1,193 @@
+mf_ae_cf out mf-ae=(False,False) spa=2.0 mae=0.717789
+mf_ae_cf out mf-ae=(False,False) spa=2.5 mae=0.700820
+mf_ae_cf out mf-ae=(False,False) spa=3.0 mae=0.631051
+mf_ae_cf out mf-ae=(False,False) spa=4.0 mae=0.571566
+mf_ae_cf out mf-ae=(False,False) spa=5.0 mae=0.549295
+mf_ae_cf out mf-ae=(False,False) spa=10.0 mae=0.461409
+mf_ae_cf out mf-ae=(False,False) spa=15.0 mae=0.436502
+mf_ae_cf out mf-ae=(False,False) spa=20.0 mae=0.423454
+mf_ae_cf out mf-ae=(False,False) spa=2.5 mae=0.671728
+mf_ae_cf out mf-ae=(False,False) spa=5.0 mae=0.537387
+
+mf_ae_cf out mf-ae=(False,True) spa=1.0 mae=1.120431
+mf_ae_cf out mf-ae=(False,True) spa=2.0 mae=0.591195
+mf_ae_cf out mf-ae=(False,True) spa=2.5 mae=0.570773
+mf_ae_cf out mf-ae=(False,True) spa=3.0 mae=0.549789
+mf_ae_cf out mf-ae=(False,True) spa=4.0 mae=0.535745
+mf_ae_cf out mf-ae=(False,True) spa=5.0 mae=0.545507
+mf_ae_cf out mf-ae=(False,True) spa=10.0 mae=0.477863
+mf_ae_cf out mf-ae=(False,True) spa=5.0 mae=0.530902
+
+mf_ae_cf out mf-ae=(False,True) spa=15.0 mae=0.453163
+mf_ae_cf out mf-ae=(False,True) spa=10.0 mae=0.477639
+mf_ae_cf out mf-ae=(False,True) spa=15.0 mae=0.451623
+mf_ae_cf out mf-ae=(False,True) spa=15.0 mae=0.452329
+mf_ae_cf out mf-ae=(False,True) spa=20.0 mae=0.435753
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=1.0 mae=1.123161
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.0 mae=0.585393
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.0 mae=0.585381
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.0 mae=0.585361
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.564603
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=3.0 mae=0.543561
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=4.0 mae=0.528178
+
+
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.522694
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.464089
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=15.0 mae=0.435001
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.413287
+
+
+
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=1.0 mae=1.123266
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.0 mae=0.584127
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.559531
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=3.0 mae=0.540555
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=1.0 mae=1.124840
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.0 mae=0.583628
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.561083
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=3.0 mae=0.541835
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=4.0 mae=0.520871
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.517439
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.458414
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=15.0 mae=0.433764
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.416491
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.0 mae=0.583678
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.558822
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=3.0 mae=0.540099
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=4.0 mae=0.519169
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.515497
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.456471
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=15.0 mae=0.435903
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.422758
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=15.0 mae=0.435032
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.415963
+
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.432573
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.415282
+
+
+cut_rate 
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.775756
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.607451
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.544131
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.523483
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.517975
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.514994
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.513841
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.515295
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.514165
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.513729
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.516045
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.515131
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.518679
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.518616
+
+
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.767343
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.576337
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.501480
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.475424
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.465195
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.461052
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.459064
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.458236
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.458644
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.458300
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.460174
+
+
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.746869
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.617884
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.576648
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.562638
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.558956
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.559458
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.558913
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.559174
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.561761
+mf_ae_cf out mf-ae-cf=(False,False,True) spa=10.0 mae=1.228565
+mf_ae_cf out mf-ae-cf=(False,False,True) spa=10.0 mae=1.226490
+mf_ae_cf out mf-ae-cf=(False,False,True) spa=10.0 mae=0.846667
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.455428
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.467349
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.458470
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.454138
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.452637
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.452231
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.455428
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.454138
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.454138
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.452637
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.453460
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.452637
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.465655
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.470956
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.466318
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.465725
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.465675
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.465655
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.465725
+
+
+ae-scf
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.562812
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.507453
+
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.441598 time=Thu Dec 20 11:17:35 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=15.0 mae=0.414275 time=Thu Dec 20 11:25:59 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.384777 time=Thu Dec 20 11:34:32 2018
+
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=1.0 mae=1.124358 time=Thu Dec 20 11:43:23 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.0 mae=0.587034 time=Thu Dec 20 11:51:32 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=3.0 mae=0.542824 time=Thu Dec 20 11:59:42 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=4.0 mae=0.517400 time=Thu Dec 20 12:07:53 2018
+
+
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.981376 time=Thu Dec 20 12:46:01 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.518166 time=Thu Dec 20 12:54:24 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.500911 time=Thu Dec 20 13:06:42 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.501863 time=Thu Dec 20 13:17:10 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.499706 time=Thu Dec 20 13:28:02 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.502250 time=Thu Dec 20 13:40:32 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.502934 time=Thu Dec 20 13:50:59 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.504523 time=Thu Dec 20 14:00:36 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.519425 time=Thu Dec 20 14:11:30 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.504300 time=Thu Dec 20 14:20:03 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.501524 time=Thu Dec 20 14:34:45 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.500285 time=Thu Dec 20 14:37:56 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.499352 time=Thu Dec 20 14:38:31 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.498776 time=Thu Dec 20 14:39:06 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.499151 time=Thu Dec 20 14:39:42 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.498154 time=Thu Dec 20 14:40:18 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.498975 time=Thu Dec 20 14:49:03 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=5.0 mae=0.501036 time=Thu Dec 20 15:00:37 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.802234 time=Fri Dec 21 09:15:53 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.516858 time=Fri Dec 21 09:17:36 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.462550 time=Fri Dec 21 09:21:59 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.443719 time=Fri Dec 21 09:24:15 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.433859 time=Fri Dec 21 09:26:31 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.427439 time=Fri Dec 21 09:29:28 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.428993 time=Fri Dec 21 09:31:57 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.423171 time=Fri Dec 21 09:35:32 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.417699 time=Fri Dec 21 09:37:23 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.416506 time=Fri Dec 21 09:40:28 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.414940 time=Fri Dec 21 09:45:24 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.973694 time=Fri Dec 21 09:56:34 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.468901 time=Fri Dec 21 10:06:43 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.443373 time=Fri Dec 21 10:19:47 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.435208 time=Fri Dec 21 10:38:57 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.432893 time=Fri Dec 21 10:48:26 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.432503 time=Fri Dec 21 11:04:02 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.433364 time=Fri Dec 21 11:12:50 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.435356 time=Fri Dec 21 11:21:41 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.436134 time=Fri Dec 21 11:31:27 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.558438 time=Fri Dec 21 11:44:07 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=1.008176 time=Fri Dec 21 11:58:19 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.558914 time=Fri Dec 21 12:41:22 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.557703 time=Fri Dec 21 12:49:21 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.557704 time=Fri Dec 21 12:57:29 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.558848 time=Fri Dec 21 13:06:22 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.559079 time=Fri Dec 21 13:18:11 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.560656 time=Fri Dec 21 13:36:40 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.561950 time=Fri Dec 21 13:47:22 2018
