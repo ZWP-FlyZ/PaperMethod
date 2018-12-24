@@ -191,3 +191,7 @@ mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.558848 time=Fri Dec 21 13:
 mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.559079 time=Fri Dec 21 13:18:11 2018
 mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.560656 time=Fri Dec 21 13:36:40 2018
 mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.561950 time=Fri Dec 21 13:47:22 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.442075 time=Mon Dec 24 09:30:37 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.437059 time=Mon Dec 24 09:31:36 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.437472 time=Mon Dec 24 09:32:00 2018
+mf_ae_cf out mf-ae-cf=(False,True,True) spa=10.0 mae=0.437876 time=Mon Dec 24 09:32:19 2018

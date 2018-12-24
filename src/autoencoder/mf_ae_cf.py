@@ -32,7 +32,7 @@ isICF=False;
 
 
 # 训练例子
-spas=[2.5]
+spas=[10]
 case = [1,2,3,4,5];
 NoneValue = 0.0;
 
@@ -74,7 +74,7 @@ continue_train = False;
 readWcache=False;
 
 use_cf=True;
-use_cf_mode = 2; # 1:UCF 2:SCF
+use_cf_mode = 3; # 1:UCF 2:SCF
 
 #预处理填补比例
 def out_cmp_rat(spa):
@@ -158,9 +158,10 @@ def mf_rat_in2(R,mf,rat):
 
 
 
-def random_empty(R ,cut_rat,NoneValue=0):
+def random_empty(R ,cut_rat,NoneValue=0,seed=121212):
     ind = np.argwhere(R!=NoneValue);
     data_size = len(ind);
+    random.seed(seed);
     cut_ind = random.sample(range(data_size),int(cut_rat*data_size));
     cut_us = ind[cut_ind];
     for u,s in cut_us:
@@ -271,7 +272,14 @@ def run(spa,case):
     
     print ('随机删除开始');
     tnow = time.time();
-    random_empty(PR, cut_rate);
+    if use_cf_mode==3:
+        R_forUcf = PR;
+        R_forScf = PR.copy();
+        random_empty(R_forUcf, 0.6);
+        random_empty(R_forScf, 0.4);
+        PR = (R_forUcf,R_forScf);
+    else:
+        random_empty(PR, cut_rate);
     print ('随机删除开始，耗时 %.2f秒  \n'%((time.time() - tnow)));    
 
 
@@ -285,12 +293,12 @@ def run(spa,case):
     else: 
         cf_mode = CF(us_shape,use_cf_mode);
     if True:
-        cf_mode.train(PR, oriR,100);
+        cf_mode.train(PR, oriR,[30,100]);
         pk.dump(cf_mode,open(cf_model_path,"wb"));
         
 #     cf_mode.scf_S(200);
 #     cf_mode.ucf_S(30);
-    mae,nmae = cf_mode.evel(valR, PR);
+    mae,nmae = cf_mode.evel(valR, PR,0.3);
     print(mae,nmae);
     print ('训练CF结束，耗时 %.2f秒  \n'%((time.time() - tnow)));    
     return mae;

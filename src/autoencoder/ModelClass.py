@@ -382,12 +382,12 @@ class CF():
             self.scf_w(R);
             self.scf_S(k);
         elif mode==3:
-            self.ucf_w(R);
+            self.ucf_w(R[0]);
             self.ucf_S(k[0]);
-            self.scf_w(R);
+            self.scf_w(R[1]);
             self.scf_S(k[1]);
         
-    def evel(self,valR,R):
+    def evel(self,valR,R,u_s_rate=0.5):
         valu,vals = np.where(valR>0);
         y = valR[valu,vals];
         ds = len(valu);
@@ -400,8 +400,8 @@ class CF():
             elif mode == 2:
                 tmp=self.pre_s(valu[i],vals[i],R);
             elif mode ==3:
-                tmp=0.5*self.pre_u(valu[i],vals[i],R);
-                tmp+=0.5*self.pre_s(valu[i],vals[i],R);
+                tmp=u_s_rate*self.pre_u(valu[i],vals[i],R[0]);
+                tmp+=(1-u_s_rate)*self.pre_s(valu[i],vals[i],R[1]);
             py[i]=  tmp;
         
         mae = np.abs(py-y);
