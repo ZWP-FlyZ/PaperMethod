@@ -336,7 +336,103 @@ class DenoiseAutoEncoder:
    
 ############################ end class ###########################
 
-def f(R,start,end):
+
+
+def get_ana_item(feat_size,a,b):
+    '''
+    相似偏好权重
+    '''
+    NoneValue=0;
+    f_s = feat_size;
+    a_not_none = a!=NoneValue;
+    a_is_none = a==NoneValue;
+    all_have = (b!=NoneValue) & a_not_none;
+    none_have =(b==NoneValue) & a_is_none;
+    any_have = np.logical_not(all_have | none_have);
+
+    tmp = np.count_nonzero(all_have);
+    if tmp!=0:
+        all_p = 1/(np.sqrt(tmp/f_s));
+    else:
+        all_p=0.0;
+    non_p = 1/(np.sqrt(np.count_nonzero(none_have)/f_s));
+    
+    tmp = np.count_nonzero(any_have);
+    if tmp==0:
+        any_p=0.0;
+    else:
+        any_p = 1/(np.sqrt(tmp/f_s)); 
+    return [all_have,none_have,any_have,all_p,non_p,any_p];    
+
+
+def get_ana_item_p(feat_size,a_not_none,a_is_none,b):
+    '''
+    相似偏好权重
+    '''
+    NoneValue=0;
+    f_s = feat_size;
+    all_have = (b!=NoneValue) & a_not_none;
+    none_have =(b==NoneValue) & a_is_none;
+    any_have = np.logical_not(all_have | none_have);
+
+    tmp = np.count_nonzero(all_have);
+    if tmp!=0:
+        all_p = 1/(np.sqrt(tmp/f_s));
+    else:
+        all_p=0.0;
+    non_p = 1/(np.sqrt(np.count_nonzero(none_have)/f_s));
+    
+    tmp = np.count_nonzero(any_have);
+    if tmp==0:
+        any_p=0.0;
+    else:
+        any_p = 1/(np.sqrt(tmp/f_s)); 
+    return [all_have,none_have,any_have,all_p,non_p,any_p];
+
+def get_feat_w(R,wd,is_u_feat_w=True,):
+    '''
+    频度权重
+    '''
+    if is_u_feat_w:
+        ax = 0;
+    else:ax=1;
+    feat_cout=np.count_nonzero(R,axis=ax);
+    med = np.median(feat_cout);
+    return np.exp((med-feat_cout)/wd);
+
+def f(R,oriR,start,end,feat_su):
+    '''
+    并行Scf代码
+    '''
+    x_s,y_s =  R.shape;
+    tR =R.T;
+    W = np.zeros((y_s,y_s));
+    for i in range(start,end):
+        a = tR[i];
+        oria = oriR[:,i];
+        a_not_none = oria!=0;
+        a_is_none = oria==0;
+        if end>=5825 and i%60 ==0:
+            print('step%d scf_w'%i);
+        for j in range(i+1,y_s):
+            b = tR[j];
+            orib = oriR[:,j];
+            log_and = (a!=0) & (b!=0);
+            ana_item = get_ana_item_p(x_s, a_not_none,a_is_none, orib);
+            ws = np.zeros_like(a);
+            for idxk in range(3):
+                tmp = log_and & ana_item[idxk];
+                ws+=np.subtract(a,b,out=np.zeros_like(a),where=tmp) \
+                    * ana_item[idxk+3];
+            ws = ws * feat_su;
+            ws=np.sum(ws**2);
+            W[i,j]=W[j,i]= 1.0/np.exp(np.sqrt(ws/x_s));  
+    return W;
+
+def f_(R,start,end):
+    '''
+    并行Scf代码
+    '''
     y_s =  R.shape[1];
     tR =R.T;
     W = np.zeros((y_s,y_s));
@@ -352,6 +448,7 @@ def f(R,start,end):
             ws=np.sum(ws**2);
             W[i,j]=W[j,i]= 1.0/np.exp(np.sqrt(ws));  
     return W;
+
 
 class CF():
     UW = None;
@@ -373,19 +470,27 @@ class CF():
             self.UW = np.zeros((shape[0],shape[0]));
             self.SW = None;
     
-    def train(self,R,oriR=None,k=10):
+    
+    def train(self,R,oriR=None,k=10,wd=100):
         mode = self.mode
         if mode==1:
-            self.ucf_w(R);
+            self.feat_w_us = get_feat_w(R, wd,True);
+            self.ucf_w(R,oriR);
             self.ucf_S(k);
+            
         elif mode==2:
-            self.scf_w(R);
+            self.feat_w_su = get_feat_w(R, wd,False);
+            self.scf_w(R,oriR);
             self.scf_S(k);
+            
         elif mode==3:
-            self.ucf_w(R[0]);
+            self.feat_w_us = get_feat_w(R[0], wd,True);
+            self.ucf_w(R[0],oriR);
             self.ucf_S(k[0]);
-            self.scf_w(R[1]);
+            self.feat_w_su = get_feat_w(R[1], wd,False);
+            self.scf_w(R[1],oriR);
             self.scf_S(k[1]);
+            
         
     def evel(self,valR,R,u_s_rate=0.5):
         valu,vals = np.where(valR>0);
@@ -410,7 +515,35 @@ class CF():
         return mae,nmae;
           
         
-    def ucf_w(self,R):
+    def ucf_w(self,R,oriR):
+        '''
+        加入偏好的计算
+        '''
+        x_size,y_size = R.shape;
+        W = self.UW;
+        for i in range(x_size):
+            a = R[i];
+            oria = oriR[i];
+            if i%60 ==0:
+                print('step%d ucf_w'%i);
+            for j in range(i+1,x_size):
+                b = R[j];
+                orib = oriR[j]
+                log_and = (a!=0) & (b!=0);
+                ana_item = get_ana_item(y_size, oria, orib);
+                ws = np.zeros_like(a);
+                for idxk in range(3):
+                    tmp = log_and & ana_item[idxk];
+                    ws+=np.subtract(a,b,out=np.zeros_like(a),where=tmp) \
+                        * ana_item[idxk+3];
+                ws = ws * self.feat_w_us;
+                ws=np.sum(ws**2);
+                W[i,j]=W[j,i]= 1.0/math.exp(np.sqrt(ws/y_size));
+
+    def ucf_w_(self,R):
+        '''
+        旧版本ucf相似度计算
+        '''
         x_size,y_size = R.shape;
         W = self.UW;
         for i in range(x_size):
@@ -427,7 +560,8 @@ class CF():
 
 
 
-    def scf_w(self,R,useP=True):
+
+    def scf_w(self,R,oriR,useP=True):
         x_size,y_size = R.shape;
         sps = [376,404,439,486,551,654,853]
         res = [];
@@ -436,12 +570,12 @@ class CF():
             pool = mp.Pool(8);
             for i in range(7):
                 end = min(start+sps[i],5825);
-                res.append(pool.apply_async(f,(R,start,end)));
+                res.append(pool.apply_async(f,(R,oriR,start,end,self.feat_w_su)));
                 start=end;
-            res.append(pool.apply_async(f,(R,start,5825)));
+            res.append(pool.apply_async(f,(R,oriR,start,5825,self.feat_w_su)));
         else:
             pool = mp.Pool(1);
-            res.append(pool.apply_async(f,(R,start,5825)));
+            res.append(pool.apply_async(f,(R,oriR,start,5825,self.feat_w_su)));
         pool.close();
         pool.join();
         

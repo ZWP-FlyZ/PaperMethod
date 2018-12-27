@@ -32,7 +32,7 @@ isICF=False;
 
 
 # 训练例子
-spas=[10]
+spas=[10,20]
 case = [1,2,3,4,5];
 NoneValue = 0.0;
 
@@ -48,43 +48,57 @@ rou=0.1
 k = 11;
 sk = 17;
 def get_cf_k(spa):
-    if   spa==2.5:  return 18;
-    elif spa==5.0:  return 18;
-    elif spa==10.0: return 15;
-    elif spa==15.0: return 11;
-    else:           return 11; 
+    if   spa==2.5:  return 200;
+    elif spa==5.0:  return 150;
+    elif spa==10.0: return 100;
+    elif spa==15.0: return 50;
+    else:           return 50;
 def get_cf_sk(spa):
-    if   spa==2.5:  return 230;
+    if   spa==2.5:  return 300;
     elif spa==5.0:  return 200;
-    elif spa==10.0: return 80;
-    elif spa==15.0: return 30;
-    else:           return 25; 
+    elif spa==10.0: return 150;
+    elif spa==15.0: return 150;
+    else:           return 150; 
+
+def get_epoch(spa):
+    if   spa==2.5:  return 350;
+    elif spa==5.0:  return 350;
+    elif spa==10.0: return 200;
+    elif spa==15.0: return 150;
+    else:           return 110;
+
 
 loc_w= 1.0;
 
 
 #### 使用mf填补 
-use_mf = False;
+use_mf = True;
 
 # 加载AutoEncoder
 use_ae=True;
 loadvalues= True;
 continue_train = False;
-# 加载相似度矩阵
-readWcache=False;
+
 
 use_cf=True;
-use_cf_mode = 3; # 1:UCF 2:SCF
+use_cf_mode = 2; # 1:UCF 2:SCF
+cf_loadmode=False;
+cf_continue_train=True;
+
+
+
+# 随机删除比率
+cut_rate = 0;
+
 
 #预处理填补比例
 def out_cmp_rat(spa):
 #     return spa/100;
-    if spa<5:return 0.06;
-    else:return spa/100+0.05;
-#     elif spa==5:return 0.07;
-#     elif spa==10:return 0.30;
-#     elif spa==15:return 0.30;
-#     elif spa==20:return 0.30;
+    if spa<5:return 0.025;
+    elif spa==5:return 0.03;
+    elif spa==10:return 0.15;
+    elif spa==15:return 0.20;
+    elif spa==20:return 0.25;
 '''
 1%:(1.05) +spa->0.700 +5 ->0.75
 2%:(0.605)
@@ -98,8 +112,7 @@ def out_cmp_rat(spa):
 '''
 
 
-# 随机删除比率
-cut_rate = 0.1;
+
 
 # 特征权重约束系数
 w_d=50;
@@ -130,7 +143,7 @@ def mf_rat_in(R,mf,rat):
         for bid in batch_ind:                
             R[bid,feat]=mf.predict(bid, feat);    
 
-def mf_rat_in2(R,mf,rat):
+def mf_rat_in2(R,mf,rat,seed=2121212):
     '''
     非重复填补
     '''
@@ -148,6 +161,7 @@ def mf_rat_in2(R,mf,rat):
         top = int(rat*batch_size);
         
     delta = top-sum_arr;
+    random.seed(seed);
     all_range= np.arange(batch_size,dtype=np.int);
     for feat in range(feat_size):
         if delta[feat]<=0:continue;
@@ -182,9 +196,19 @@ def run(spa,case):
     SW_path = base_path+'/Dataset/ws/BP_CF_SW_spa%.1f_t%d.txt'%(spa,case);
     loc_path = base_path+'/Dataset/ws';   
     aemodel_path=base_path+'/Dataset/dae_values/model_spa%.1f_case%d_mf%s.dp'%(spa,case,use_mf);
-    cf_model_path = base_path+'/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cfmod%d.dp'%(spa,case,use_mf,use_cf_mode);
+    if cut_rate==0:
+        cf_model_path = base_path+'/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cfmod%d.dp'%(spa,case,use_mf,use_cf_mode);
+    else:
+        cf_model_path = base_path+ \
+                '/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cut%.1f_cfmod%d.dp'%(spa,case,use_mf,cut_rate,use_cf_mode);
     
     mf_model_path=base_path+'/Dataset/mf_baseline_values/model_spa%.1f_case%d.dp'%(spa,case);
+
+
+    if use_cf_mode==1:
+        near_lab_k=get_cf_k(spa);
+    else:
+        near_lab_k=get_cf_sk(spa);
 
 
     print('开始实验，稀疏度=%.1f,case=%d'%(spa,case));
@@ -247,7 +271,7 @@ def run(spa,case):
                             actfunc1,deactfunc1,
                              actfunc1,deactfunc1);
     if continue_train:
-        ae_val_res = dae_model.train(R, oriR,valR,learn_param,repeat);
+        ae_val_res = dae_model.train(R, oriR,valR,learn_param,get_epoch(spa));
         print(min(ae_val_res),ae_val_res);
         with open(aemodel_path,"wb") as f:
             pk.dump(dae_model,f);
@@ -267,7 +291,7 @@ def run(spa,case):
     print ('训练模型结束，耗时 %.2f秒  \n'%((time.time() - tnow)));    
     
     if not use_cf:
-        return ae_val_res[-1]*20;
+        return ae_val_res[-1]*20,0;
     
     
     print ('随机删除开始');
@@ -288,31 +312,36 @@ def run(spa,case):
     if not use_ae:
         PR = R;
     tnow = time.time();
-    if False:
+    if cf_loadmode:
         cf_mode = pk.load(open(cf_model_path,"rb"));
     else: 
         cf_mode = CF(us_shape,use_cf_mode);
-    if True:
-        cf_mode.train(PR, oriR,[30,100]);
-        pk.dump(cf_mode,open(cf_model_path,"wb"));
         
-#     cf_mode.scf_S(200);
-#     cf_mode.ucf_S(30);
-    mae,nmae = cf_mode.evel(valR, PR,0.3);
+    if cf_continue_train:
+        cf_mode.train(PR, oriR,near_lab_k);
+        pk.dump(cf_mode,open(cf_model_path,"wb"));
+    elif use_cf_mode==1:
+        cf_mode.ucf_S(near_lab_k);
+    elif use_cf_mode==2:
+        cf_mode.scf_S(near_lab_k);
+
+    mae,nmae = cf_mode.evel(valR, oriR);
     print(mae,nmae);
     print ('训练CF结束，耗时 %.2f秒  \n'%((time.time() - tnow)));    
-    return mae;
+    return mae,nmae;
     
 
 if __name__ == '__main__':
     
     for sp in spas:
-        s = 0;cot=0;
+        s = 0;s2=0;cot=0;
         for ca in case:
             for i in range(1):
-                s+=run(sp,ca);
+                mae,nmae = run(sp,ca);
+                s+=mae;
+                s2+=nmae;
                 cot+=1;
-        out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,time.asctime());
+        out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f nmae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,s2/cot,time.asctime());
         fwrite_append('./mf_ae_cf_res.txt',out_s);
         print(out_s);
     pass
