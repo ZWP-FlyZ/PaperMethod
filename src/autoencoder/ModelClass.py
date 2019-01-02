@@ -509,6 +509,7 @@ class CF():
                 tmp+=(1-u_s_rate)*self.pre_s(valu[i],vals[i],R[1]);
             py[i]=  tmp;
         
+        
         mae = np.abs(py-y);
         nmae = np.sum(mae)/np.sum(y);
         mae = np.mean(mae);

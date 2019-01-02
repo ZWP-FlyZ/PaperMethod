@@ -32,8 +32,8 @@ isICF=False;
 
 
 # 训练例子
-spas=[10,20]
-case = [1,2,3,4,5];
+spas=[20]
+case = [1];
 NoneValue = 0.0;
 
 # autoencoder 参数
@@ -49,41 +49,41 @@ k = 11;
 sk = 17;
 def get_cf_k(spa):
     if   spa==2.5:  return 200;
-    elif spa==5.0:  return 150;
-    elif spa==10.0: return 100;
+    elif spa==5.0:  return 140;
+    elif spa==10.0: return 80;
     elif spa==15.0: return 50;
-    else:           return 50;
+    else:           return 40;
 def get_cf_sk(spa):
-    if   spa==2.5:  return 300;
-    elif spa==5.0:  return 200;
-    elif spa==10.0: return 150;
-    elif spa==15.0: return 150;
-    else:           return 150; 
+    if   spa==2.5:  return 2400;
+    elif spa==5.0:  return 360;
+    elif spa==10.0: return 160;
+    elif spa==15.0: return 100;
+    else:           return 70; 
 
 def get_epoch(spa):
     if   spa==2.5:  return 350;
     elif spa==5.0:  return 350;
-    elif spa==10.0: return 200;
-    elif spa==15.0: return 150;
-    else:           return 110;
+    elif spa==10.0: return 100;
+    elif spa==15.0: return 100;
+    else:           return 100;
 
 
 loc_w= 1.0;
 
 
 #### 使用mf填补 
-use_mf = True;
+use_mf = False;
 
 # 加载AutoEncoder
 use_ae=True;
-loadvalues= True;
-continue_train = False;
+loadvalues= False;
+continue_train = not loadvalues;
 
 
 use_cf=True;
-use_cf_mode = 2; # 1:UCF 2:SCF
+use_cf_mode = 1; # 1:UCF 2:SCF
 cf_loadmode=False;
-cf_continue_train=True;
+cf_continue_train= not cf_loadmode;
 
 
 
@@ -94,12 +94,24 @@ cut_rate = 0;
 #预处理填补比例
 def out_cmp_rat(spa):
 #     return spa/100;
-    if spa<5:return 0.025;
+    if spa<5:return 0.30;
     elif spa==5:return 0.03;
     elif spa==10:return 0.15;
     elif spa==15:return 0.20;
-    elif spa==20:return 0.25;
+    elif spa==20:return 0.60;
 '''
+
+10%:(0.4501)+5->0.4505 +15->0.4500 +30->0.4491 
+
+case2:
+
+2.5%:(0.553)+5->0.5658 +15->0.5651 +30->0.5673 +45->0.4444 +60->0.4448 +75->0.4448 +100->0.4452
+10%:(0.4501)+5->0.448 +15->0.4467 +30->0.4452 +45->0.4444 +60->0.4448 +75->0.4448 +100->0.4452
+15%:(0.419)+15->0.4177 +30->0.4166+45->0.4166 +60->0.4176 +75->0.4177 +100->0.4177
+20%:(0.393)+15->0.3951 +30->0.3951 +45->0.3951 +60->0.4176 +75->0.4177 +100->0.4177
+
+
+
 1%:(1.05) +spa->0.700 +5 ->0.75
 2%:(0.605)
 2.5%:(0.590)+3.5->0.578   0.5 +20->0.515 +40->0.517 +60->0.512 +80->0.53 +95->0.545
@@ -161,7 +173,7 @@ def mf_rat_in2(R,mf,rat,seed=2121212):
         top = int(rat*batch_size);
         
     delta = top-sum_arr;
-    random.seed(seed);
+#     random.seed(seed);
     all_range= np.arange(batch_size,dtype=np.int);
     for feat in range(feat_size):
         if delta[feat]<=0:continue;
@@ -336,7 +348,7 @@ if __name__ == '__main__':
     for sp in spas:
         s = 0;s2=0;cot=0;
         for ca in case:
-            for i in range(1):
+            for i in range(2):
                 mae,nmae = run(sp,ca);
                 s+=mae;
                 s2+=nmae;
