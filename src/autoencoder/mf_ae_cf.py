@@ -32,8 +32,8 @@ isICF=False;
 
 
 # 训练例子
-spas=[20]
-case = [1];
+spas=[2.5,5,10,15,20]
+case = [1,2,3,4,5];
 NoneValue = 0.0;
 
 # autoencoder 参数
@@ -61,7 +61,7 @@ def get_cf_sk(spa):
     else:           return 70; 
 
 def get_epoch(spa):
-    if   spa==2.5:  return 350;
+    if   spa==2.5:  return 370;
     elif spa==5.0:  return 350;
     elif spa==10.0: return 100;
     elif spa==15.0: return 100;
@@ -72,16 +72,16 @@ loc_w= 1.0;
 
 
 #### 使用mf填补 
-use_mf = False;
+use_mf = True;
 
 # 加载AutoEncoder
 use_ae=True;
-loadvalues= False;
+loadvalues= True;
 continue_train = not loadvalues;
 
 
 use_cf=True;
-use_cf_mode = 1; # 1:UCF 2:SCF
+use_cf_mode = 2; # 1:UCF 2:SCF
 cf_loadmode=False;
 cf_continue_train= not cf_loadmode;
 
@@ -94,11 +94,11 @@ cut_rate = 0;
 #预处理填补比例
 def out_cmp_rat(spa):
 #     return spa/100;
-    if spa<5:return 0.30;
-    elif spa==5:return 0.03;
+    if spa<5:return 0.025;
+    elif spa==5:return 0.05;
     elif spa==10:return 0.15;
     elif spa==15:return 0.20;
-    elif spa==20:return 0.60;
+    elif spa==20:return 0.25;
 '''
 
 10%:(0.4501)+5->0.4505 +15->0.4500 +30->0.4491 
@@ -173,7 +173,7 @@ def mf_rat_in2(R,mf,rat,seed=2121212):
         top = int(rat*batch_size);
         
     delta = top-sum_arr;
-#     random.seed(seed);
+    random.seed(seed);
     all_range= np.arange(batch_size,dtype=np.int);
     for feat in range(feat_size):
         if delta[feat]<=0:continue;
@@ -222,7 +222,7 @@ def run(spa,case):
     else:
         near_lab_k=get_cf_sk(spa);
 
-
+    print(use_cf_mode,loadvalues);
     print('开始实验，稀疏度=%.1f,case=%d'%(spa,case));
     print ('加载训练数据开始');
     now = time.time();
@@ -262,7 +262,7 @@ def run(spa,case):
         # 填补处理
         cmp_rat = out_cmp_rat(spa);
         print(cmp_rat);
-        mf_rat_in2(R,mf_model,rat=cmp_rat);        
+        mf_rat_in2(R,mf_model,rat=cmp_rat,seed=2121212+case*10);        
     print(np.sum(R-oriR));
     
     # 归一化
@@ -315,9 +315,14 @@ def run(spa,case):
         random_empty(R_forScf, 0.4);
         PR = (R_forUcf,R_forScf);
     else:
-        random_empty(PR, cut_rate);
+        random_empty(PR, cut_rate,seed=121212+case*10);
     print ('随机删除开始，耗时 %.2f秒  \n'%((time.time() - tnow)));    
 
+#     wt = (PR!=0) & (valR!=0); 
+#     tmp = np.subtract(PR,valR,out=np.zeros_like(PR),where=wt);
+#     tmp = np.sum(np.abs(tmp))/np.count_nonzero(wt);
+#     return tmp,0;
+    
 
 
     print ('训练CF开始');
@@ -345,15 +350,39 @@ def run(spa,case):
 
 if __name__ == '__main__':
     
-    for sp in spas:
-        s = 0;s2=0;cot=0;
-        for ca in case:
-            for i in range(2):
-                mae,nmae = run(sp,ca);
-                s+=mae;
-                s2+=nmae;
-                cot+=1;
-        out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f nmae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,s2/cot,time.asctime());
-        fwrite_append('./mf_ae_cf_res.txt',out_s);
-        print(out_s);
+
+    for cur in [0.6,0.5,0.4,0.3,0.2,0.1]:
+        cut_rate = cur;
+        for sp in spas:
+            s = 0;s2=0;cot=0;
+            for ca in case:
+                for i in range(1):
+                    mae,nmae = run(sp,ca);
+                    s+=mae;
+                    s2+=nmae;
+                    cot+=1;
+            out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f nmae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,s2/cot,time.asctime());
+            fwrite_append('./mf_ae_cf_res.txt',out_s);
+            print(out_s);
+
+    
+    
+    
+    
+    
+#     for ms in [1,2]:
+#         use_cf_mode=ms;
+#         for sp in spas:
+#             s = 0;s2=0;cot=0;
+#             for ca in case:
+#                 for i in range(1):
+#                     mae,nmae = run(sp,ca);
+#                     s+=mae;
+#                     s2+=nmae;
+#                     cot+=1;
+#             out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f nmae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,s2/cot,time.asctime());
+#             fwrite_append('./mf_ae_cf_res.txt',out_s);
+#             print(out_s);
+#         loadvalues= True;
+#         continue_train = not loadvalues;
     pass

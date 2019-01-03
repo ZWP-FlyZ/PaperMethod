@@ -607,3 +607,90 @@ mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.395167 nmae=0.444467 time
 mf_ae_cf out mf-ae-cf=(False,True,True) spa=20.0 mae=0.395167 nmae=0.444467 time=Sat Dec 29 13:50:41 2018
 mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.565162 nmae=0.624267 time=Sat Dec 29 14:08:59 2018
 mf_ae_cf out mf-ae-cf=(False,True,True) spa=2.5 mae=0.565162 nmae=0.624267 time=Sat Dec 29 14:19:22 2018
+
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.827204 nmae=0.000000 time=Thu Jan  3 02:16:03 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.827618 nmae=0.000000 time=Thu Jan  3 02:17:20 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.533755 nmae=0.000000 time=Thu Jan  3 02:20:15 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.554522 nmae=0.000000 time=Thu Jan  3 02:21:29 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.532221 nmae=0.000000 time=Thu Jan  3 02:22:21 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.512527 nmae=0.000000 time=Thu Jan  3 02:23:19 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.514417 nmae=0.000000 time=Thu Jan  3 02:24:54 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.553805 nmae=0.000000 time=Thu Jan  3 02:27:17 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.538056 nmae=0.000000 time=Thu Jan  3 02:32:58 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.531391 nmae=0.000000 time=Thu Jan  3 02:33:33 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.534195 nmae=0.000000 time=Thu Jan  3 02:33:58 2019
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.554231 nmae=0.620167 time=Thu Jan  3 03:29:07 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.510979 nmae=0.552262 time=Thu Jan  3 03:50:22 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.449114 nmae=0.495309 time=Wed Jan  2 19:57:12 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.420635 nmae=0.464128 time=Wed Jan  2 20:04:10 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.401105 nmae=0.440708 time=Wed Jan  2 20:11:13 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.522257 nmae=0.584367 time=Wed Jan  2 20:29:24 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.472955 nmae=0.511148 time=Wed Jan  2 20:47:31 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.388466 nmae=0.428430 time=Wed Jan  2 21:05:33 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.356963 nmae=0.393885 time=Wed Jan  2 21:23:47 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.342328 nmae=0.376149 time=Wed Jan  2 21:42:05 2019
+
+0.8
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.586725 nmae=0.656496 time=Thu Jan  3 09:44:02 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.563484 nmae=0.609127 time=Thu Jan  3 09:44:47 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.512908 nmae=0.565713 time=Thu Jan  3 09:45:38 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.480104 nmae=0.529728 time=Thu Jan  3 09:46:30 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.457733 nmae=0.502910 time=Thu Jan  3 09:47:25 2019
+
+0.7
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.584314 nmae=0.653856 time=Thu Jan  3 09:48:09 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.559332 nmae=0.604583 time=Thu Jan  3 09:48:54 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.500519 nmae=0.551983 time=Thu Jan  3 09:49:45 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.466994 nmae=0.515260 time=Thu Jan  3 09:50:37 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.442933 nmae=0.486636 time=Thu Jan  3 09:51:33 2019
+
+0.6
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.583913 nmae=0.653362 time=Thu Jan  3 09:52:17 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.551189 nmae=0.595803 time=Thu Jan  3 09:53:05 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.491491 nmae=0.542057 time=Thu Jan  3 09:53:58 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.454518 nmae=0.501482 time=Thu Jan  3 09:54:52 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.432885 nmae=0.475604 time=Thu Jan  3 09:55:48 2019
+
+0.5
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.577820 nmae=0.646563 time=Thu Jan  3 09:56:33 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.541105 nmae=0.584887 time=Thu Jan  3 09:57:21 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.480642 nmae=0.530074 time=Thu Jan  3 09:58:14 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.445833 nmae=0.491926 time=Thu Jan  3 09:59:09 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.424710 nmae=0.466622 time=Thu Jan  3 10:00:07 2019
+
+0.4
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.572077 nmae=0.640123 time=Thu Jan  3 10:00:53 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.532588 nmae=0.575661 time=Thu Jan  3 10:01:41 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.470760 nmae=0.519169 time=Thu Jan  3 10:02:35 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.437921 nmae=0.483197 time=Thu Jan  3 10:03:32 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.417913 nmae=0.459170 time=Thu Jan  3 10:04:31 2019
+
+0.3
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.568355 nmae=0.635945 time=Thu Jan  3 10:05:17 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.527101 nmae=0.569709 time=Thu Jan  3 10:06:06 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.464659 nmae=0.512464 time=Thu Jan  3 10:07:01 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.431417 nmae=0.476015 time=Thu Jan  3 10:08:00 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.412022 nmae=0.452695 time=Thu Jan  3 10:09:01 2019
+
+0.2
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.565518 nmae=0.632780 time=Thu Jan  3 10:09:46 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.521505 nmae=0.563616 time=Thu Jan  3 10:10:34 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.457095 nmae=0.504106 time=Thu Jan  3 10:11:29 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.427592 nmae=0.471805 time=Thu Jan  3 10:12:28 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.408165 nmae=0.448462 time=Thu Jan  3 10:13:31 2019
+
+0.1
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.561107 nmae=0.627887 time=Thu Jan  3 10:14:11 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=5.0 mae=0.514839 nmae=0.556466 time=Thu Jan  3 10:14:57 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=10.0 mae=0.451998 nmae=0.498492 time=Thu Jan  3 10:15:51 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=15.0 mae=0.423668 nmae=0.467465 time=Thu Jan  3 10:16:50 2019
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=20.0 mae=0.404239 nmae=0.444148 time=Thu Jan  3 10:17:53 2019
+
+
+
+
+mf_ae_cf out mf-ae-cf=(True,True,True) spa=2.5 mae=0.560329 nmae=0.626976 time=Thu Jan  3 10:41:17 2019
