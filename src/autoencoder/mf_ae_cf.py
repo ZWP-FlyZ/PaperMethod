@@ -32,12 +32,19 @@ isICF=False;
 
 
 # 训练例子
-spas=[2.5,5,10,15,20]
-case = [1,2,3,4,5];
+spas=[2.5]
+case = [2];
 NoneValue = 0.0;
 
 # autoencoder 参数
-hidden_node = 80;
+hidden_node = 64;
+def get_hid_f(spa):
+    if   spa==2.5:  return 48;
+    elif spa==5.0:  return 48;
+    elif spa==10.0: return 80;
+    elif spa==15.0: return 50;
+    else:           return 40;
+
 learn_rate=0.4
 learn_param = [learn_rate,100,1.0];
 ## 15%ep=100,[400,200,100]
@@ -61,26 +68,26 @@ def get_cf_sk(spa):
     else:           return 70; 
 
 def get_epoch(spa):
-    if   spa==2.5:  return 370;
-    elif spa==5.0:  return 350;
-    elif spa==10.0: return 100;
-    elif spa==15.0: return 100;
-    else:           return 100;
+    if   spa==2.5:  return 600;
+    elif spa==5.0:  return 600;
+    elif spa==10.0: return 600;
+    elif spa==15.0: return 150;
+    else:           return 120;
 
 
 loc_w= 1.0;
 
 
 #### 使用mf填补 
-use_mf = True;
+use_mf = False;
 
 # 加载AutoEncoder
 use_ae=True;
-loadvalues= True;
-continue_train = not loadvalues;
+loadvalues= False;
+continue_train = True;
 
 
-use_cf=True;
+use_cf=False;
 use_cf_mode = 2; # 1:UCF 2:SCF
 cf_loadmode=False;
 cf_continue_train= not cf_loadmode;
@@ -284,7 +291,7 @@ def run(spa,case):
                              actfunc1,deactfunc1);
     if continue_train:
         ae_val_res = dae_model.train(R, oriR,valR,learn_param,get_epoch(spa));
-        print(min(ae_val_res),ae_val_res);
+        print(min(ae_val_res)*20,ae_val_res);
         with open(aemodel_path,"wb") as f:
             pk.dump(dae_model,f);
     
@@ -351,24 +358,38 @@ def run(spa,case):
 if __name__ == '__main__':
     
 
-    for cur in [0.6,0.5,0.4,0.3,0.2,0.1]:
-        cut_rate = cur;
-        for sp in spas:
-            s = 0;s2=0;cot=0;
-            for ca in case:
-                for i in range(1):
-                    mae,nmae = run(sp,ca);
-                    s+=mae;
-                    s2+=nmae;
-                    cot+=1;
-            out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f nmae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,s2/cot,time.asctime());
-            fwrite_append('./mf_ae_cf_res.txt',out_s);
-            print(out_s);
+    for sp in spas:
+        s = 0;s2=0;cot=0;
+        for ca in case:
+            for i in range(1):
+                mae,nmae = run(sp,ca);
+                s+=mae;
+                s2+=nmae;
+                cot+=1;
+        out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f nmae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,s2/cot,time.asctime());
+        fwrite_append('./mf_ae_cf_res.txt',out_s);
 
-    
-    
-    
-    
+
+
+
+
+
+
+#     for cur in [0.6,0.5,0.4,0.3,0.2,0.1]:
+#         cut_rate = cur;
+#         for sp in spas:
+#             s = 0;s2=0;cot=0;
+#             for ca in case:
+#                 for i in range(1):
+#                     mae,nmae = run(sp,ca);
+#                     s+=mae;
+#                     s2+=nmae;
+#                     cot+=1;
+#             out_s = 'mf_ae_cf out mf-ae-cf=(%s,%s,%s) spa=%.1f mae=%.6f nmae=%.6f time=%s'%(use_mf,use_ae,use_cf,sp,s/cot,s2/cot,time.asctime());
+#             fwrite_append('./mf_ae_cf_res.txt',out_s);
+#             print(out_s);
+
+
     
 #     for ms in [1,2]:
 #         use_cf_mode=ms;
