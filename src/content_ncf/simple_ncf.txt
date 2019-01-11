@@ -1,0 +1,27 @@
+spa=2.5 mae=0.455437 nmae=0.000000 time=Tue Jan  8 13:08:41 2019
+spa=5.0 mae=0.429164 nmae=0.000000 time=Tue Jan  8 13:38:00 2019
+spa=5.0 mae=0.446169 nmae=0.000000 time=Tue Jan  8 17:22:32 2019
+spa=5.0 mae=0.435295 nmae=0.000000 time=Tue Jan  8 17:34:49 2019
+spa=5.0 mae=0.419303 nmae=0.000000 time=Tue Jan  8 18:08:01 2019
+spa=5.0 mae=0.434941 nmae=0.000000 time=Tue Jan  8 18:16:37 2019
+spa=5.0 mae=0.434459 nmae=0.000000 time=Tue Jan  8 18:29:08 2019
+spa=5.0 mae=0.412026 nmae=0.000000 time=Tue Jan  8 18:49:43 2019
+spa=5.0 mae=0.405081 nmae=0.000000 time=Tue Jan  8 19:27:39 2019
+spa=5.0 mae=0.438852 nmae=0.000000 time=Tue Jan  8 19:33:16 2019
+spa=5.0 mae=0.435312 nmae=0.000000 time=Tue Jan  8 19:38:34 2019
+spa=5.0 mae=0.416419 nmae=0.000000 time=Tue Jan  8 19:52:50 2019
+spa=5.0 mae=0.414599 nmae=0.000000 time=Tue Jan  8 19:59:02 2019
+spa=5.0 mae=0.413228 nmae=0.000000 time=Tue Jan  8 20:24:54 2019
+
+
+
+spa=2.5 mae=0.454714 nmae=0.000000 time=Tue Jan  8 20:51:28 2019
+spa=5.0 mae=0.386988 nmae=0.000000 time=Tue Jan  8 21:44:50 2019
+spa=10.0 mae=0.341060 nmae=0.000000 time=Tue Jan  8 23:13:52 2019
+spa=15.0 mae=0.327961 nmae=0.000000 time=Wed Jan  9 02:27:48 2019
+spa=5.0 mae=0.398985 nmae=0.000000 time=Wed Jan  9 12:42:32 2019
+spa=5.0 mae=0.395816 nmae=0.000000 time=Thu Jan 10 11:19:36 2019
+spa=5.0 mae=0.436450 nmae=0.000000 time=Thu Jan 10 12:14:29 2019
+spa=5.0 mae=0.407657 nmae=0.000000 time=Thu Jan 10 14:13:18 2019
+spa=5.0 mae=0.405764 nmae=0.000000 time=Thu Jan 10 15:20:04 2019
+spa=5.0 mae=0.416831 nmae=0.000000 time=Thu Jan 10 15:51:15 2019
