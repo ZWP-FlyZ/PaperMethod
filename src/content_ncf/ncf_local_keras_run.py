@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 2019年1月7日
+Created on 2019年1月15日
 
 @author: zwp
 '''
@@ -12,7 +12,7 @@ import os;
 from tools import SysCheck;
 
 from content_ncf.ncf_param import NcfTraParm,NcfCreParam;
-from content_ncf.ncf_models import simple_ncf,simple_ncf_pp,simple_ncf_bl;
+from content_ncf.ncf_models import simple_ncf,simple_ncf_pp,simple_ncf_bl,simple_ncf_local
 from tools.fwrite import fwrite_append
 from content_ncf import localtools;
 
@@ -23,14 +23,14 @@ if SysCheck.check()=='l':
 origin_data = base_path+'/rtdata.txt';
 
 
-spas = [10];
+spas = [1,2,3,4];
 case = [1,2,3,4,5];
 
 def run(spa,case):
     train_path = base_path+'/Dataset/ws/train_n/sparseness%.1f/training%d.txt'%(spa,case);
     test_path = base_path+'/Dataset/ws/test_n/sparseness%.1f/test%d.txt'%(spa,case);
     cache_path = base_path+'/Dataset/ncf_values/spa%.1f_case%d.h5'%(spa,case);
-    result_file= './result/ws_spa%.1f_case%d.txt'%(spa,case);
+    result_file= './result/ws_local_spa%.1f_case%d.txt'%(spa,case);
     dbug_paht = 'E:/work/Dataset/wst64/rtdata1.txt';
     
     loc_classes = base_path+'/Dataset/ws/localinfo/ws_content_classif_out.txt';
@@ -51,11 +51,11 @@ def run(spa,case):
     tn = np.alen(ttrdata);
     print ('加载测试数据完成，耗时 %.2f秒，数据总条数%d  \n'%((time.time() - tnow),tn));
     
-#     print ('分类数据集开始');
-#     tnow = time.time();
-#     train_sets = localtools.data_split_class(ser_class, trdata);
-#     test_sets = localtools.data_split_class(ser_class, ttrdata);
-#     print ('分类数据集结束，耗时 %.2f秒  \n'%((time.time() - tnow)));
+    print ('分类数据集开始');
+    tnow = time.time();
+    train_sets = localtools.data_split_class(ser_class, trdata);
+    test_sets = localtools.data_split_class(ser_class, ttrdata);
+    print ('分类数据集结束，耗时 %.2f秒  \n'%((time.time() - tnow)));
     
     
     
@@ -63,9 +63,9 @@ def run(spa,case):
     tp = NcfTraParm();
     cp.us_shape=(339,5825);
     cp.hid_feat=32;
-    cp.hid_units=[32,16];
+    cp.hid_units=[32,12];
     cp.drop_p=0
-    cp.reg_p=0
+    cp.reg_p=0.000001
     
     # 处理用户访问服务记录 
     R = np.zeros(cp.us_shape);
@@ -90,23 +90,23 @@ def run(spa,case):
     
      
         
-    tp.train_data=trdata;
-    tp.test_data=ttrdata;
-    tp.epoch=30;
+    tp.train_data=train_sets;
+    tp.test_data=test_sets;
+    tp.epoch=15;
     tp.batchsize=5;
     '''
-    Adagrad lr 0.03 zui hao
+    Adagrad lr 0.05 zui hao
     RMSprop lr 0.005
     
     '''
     
-    tp.learn_rate=0.007;
+    tp.learn_rate=[0.045]*classiy_size;
     tp.lr_decy_rate=1.0
     tp.lr_decy_step=int(n/tp.batch_size);
     tp.cache_rec_path=cache_path;
     tp.result_file_path= result_file;
     tp.load_cache_rec=False;
-    tp.classif_size = 0;
+    tp.classif_size = classiy_size;
     tp.us_invked= R;
     tp.umean=umean;
     tp.smean=smean;
@@ -114,7 +114,7 @@ def run(spa,case):
     
     print ('训练模型开始');
     tnow = time.time();
-    model = simple_ncf_pp(cp);
+    model = simple_ncf_local(cp);
     
     mae,nmae = model.train(tp);
                      
@@ -133,10 +133,6 @@ if __name__ == '__main__':
                 s+=mae;
                 s2+=nmae;
                 cot+=1;
-        out_s = '(NCF-FEAT)spa=%.1f mae=%.6f nmae=%.6f time=%s'%(sp,s/cot,s2/cot,time.asctime());
+        out_s = 'spa=%.1f mae=%.6f nmae=%.6f time=%s'%(sp,s/cot,s2/cot,time.asctime());
         print(out_s);
-        fwrite_append('./simple_ncf.txt',out_s);
-            
-            
-            
-            
+        fwrite_append('./simple_ncf_local.txt',out_s);

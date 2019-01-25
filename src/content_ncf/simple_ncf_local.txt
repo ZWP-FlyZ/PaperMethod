@@ -1,0 +1,4 @@
+spa=1.0 mae=0.474784 nmae=0.000000 time=Wed Jan 16 10:36:10 2019
+spa=2.0 mae=0.397652 nmae=0.000000 time=Wed Jan 16 11:04:44 2019
+spa=3.0 mae=0.384993 nmae=0.000000 time=Wed Jan 16 11:46:42 2019
+spa=4.0 mae=0.375963 nmae=0.000000 time=Wed Jan 16 12:38:50 2019

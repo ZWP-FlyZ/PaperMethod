@@ -173,8 +173,8 @@ class Fcm():
 #         self.U = np.zeros((ds,clu));
 
         # 归一化 IP
-        data[:,2]=data[:,2]/200.0;
-        data[:,3]=data[:,3]/200.0;
+        data[:,2]=data[:,2]/100.0;
+        data[:,3]=data[:,3]/100.0;
 
 
         # 初始化中心点
@@ -253,7 +253,7 @@ def run():
     data=np.array(data);
 
     fcm = Fcm(k,1.5);
-    cent,res = fcm.train(data, max_loop=100, max_e=0.0001,di=2)
+    cent,res = fcm.train(data, max_loop=100, max_e=0.001,di=2)
     
     print(cent);
     print(res);
@@ -269,7 +269,7 @@ def run():
         print(tmp2);
         print();
         
-#     write2file(res);   
+    write2file(res);   
     pass;
 
 if __name__ == '__main__':
