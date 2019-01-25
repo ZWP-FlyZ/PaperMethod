@@ -429,7 +429,7 @@ def f(R,oriR,start,end,feat_su):
             W[i,j]=W[j,i]= 1.0/np.exp(np.sqrt(ws/x_s));  
     return W;
 
-def f_(R,start,end):
+def f_(R,oriR,start,end,feat_su):
     '''
     并行Scf代码
     '''
@@ -531,6 +531,7 @@ class CF():
                 b = R[j];
                 orib = oriR[j]
                 log_and = (a!=0) & (b!=0);
+                cot = np.count_nonzero(log_and)
                 ana_item = get_ana_item(y_size, oria, orib);
                 ws = np.zeros_like(a);
                 for idxk in range(3):
@@ -539,9 +540,9 @@ class CF():
                         * ana_item[idxk+3];
                 ws = ws * self.feat_w_us;
                 ws=np.sum(ws**2);
-                W[i,j]=W[j,i]= 1.0/math.exp(np.sqrt(ws/y_size));
-
-    def ucf_w_(self,R):
+                W[i,j]=W[j,i]= 1.0/math.exp(np.sqrt(ws/cot));
+#                 W[i,j]=W[j,i]= 1.0/np.sqrt(ws/cot);    
+    def ucf_w_(self,R,oriR=None):
         '''
         旧版本ucf相似度计算
         '''
@@ -554,11 +555,12 @@ class CF():
             for j in range(i+1,x_size):
                 b = R[j];
                 log_and = (a!=0) & (b!=0);
+                cot = np.count_nonzero(log_and)
                 ws = np.zeros_like(a);
                 ws+=np.subtract(a,b,out=np.zeros_like(a),where=log_and)
                 ws=np.sum(ws**2);
                 W[i,j]=W[j,i]= 1.0/math.exp(np.sqrt(ws));
-
+#                 W[i,j]=W[j,i]= 1.0/np.sqrt(ws);
 
 
 
@@ -611,7 +613,8 @@ class CF():
                 break;
             if R[simu,s]==0:
                 continue;
-            rw = uw[simu];            
+            rw = uw[simu];  
+#             rw = 1;            
             sum_up+= rw*R[simu,s];
             sum_down+=rw;
         if sum_down != 0:

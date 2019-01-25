@@ -32,8 +32,8 @@ isICF=False;
 
 
 # 训练例子
-spas=[2.5]
-case = [2];
+spas=[10]
+case = [1,2,3,4,5];
 NoneValue = 0.0;
 
 # autoencoder 参数
@@ -82,13 +82,13 @@ loc_w= 1.0;
 use_mf = False;
 
 # 加载AutoEncoder
-use_ae=True;
+use_ae=False;
 loadvalues= False;
-continue_train = True;
+continue_train = False;
 
 
-use_cf=False;
-use_cf_mode = 2; # 1:UCF 2:SCF
+use_cf=True;
+use_cf_mode = 1; # 1:UCF 2:SCF
 cf_loadmode=False;
 cf_continue_train= not cf_loadmode;
 
