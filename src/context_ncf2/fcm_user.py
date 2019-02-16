@@ -217,7 +217,7 @@ def run():
     data=[];
     names=[];
     area=[];
-    k=3;
+    k=4;
     for uid in range(339):
         un = user_loc[uid][1];
         names.append(un);
@@ -232,7 +232,7 @@ def run():
     data=np.array(data);
 
     # 1.2-1.3
-    fcm = Fcm(k,2.5);
+    fcm = Fcm(k,1.7);
     cent,res = fcm.train(data, max_loop=100, max_e=0.00001,di=k)
 
 #     cent,res = simple_km2(data,k,k);

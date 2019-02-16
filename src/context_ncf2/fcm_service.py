@@ -222,7 +222,7 @@ def run():
     data=[];
     names=[];
     area=[];
-    k=3;
+    k=6;
     for sid in range(5825):
         sn = ser_loc[sid][1];
         names.append(sn);
@@ -236,7 +236,7 @@ def run():
         data.append(lc);
     data=np.array(data);
 
-    fcm = Fcm(k,2);
+    fcm = Fcm(k,1.7);
     cent,res = fcm.train(data, max_loop=100, max_e=0.001,di=2)
     
     print(cent);

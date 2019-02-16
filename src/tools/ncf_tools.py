@@ -30,6 +30,27 @@ def reoge_data_for_keras(rec_table):
         rec_table[:,2:3].astype(np.float32)
 
 
+def reoge_data_for_context_(rec_table,fcm_ws):
+    user_w,service_w = fcm_ws;
+    rec_table = np.array(rec_table);
+    rec_table = del_non_data(rec_table);
+    u = rec_table[:,0].astype(int);
+    s = rec_table[:,1].astype(int);
+    u_cw =  user_w[u];
+    s_cw = service_w[s];
+    return [u_cw,s_cw],    \
+        rec_table[:,2:3].astype(np.float32)
+        
+def reoge_data_for_context(rec_table,fcm_ws):
+    user_w,service_w = fcm_ws;
+    rec_table = np.array(rec_table);
+    rec_table = del_non_data(rec_table);
+    u = rec_table[:,0].astype(int);
+    s = rec_table[:,1].astype(int);
+    u_cw =  user_w[u];
+    s_cw = service_w[s];
+    return [u,s,u_cw,s_cw],    \
+        rec_table[:,2:3].astype(np.float32)
 
 def reoge_data3D(rec_table):
     rec_table = np.array(rec_table);
