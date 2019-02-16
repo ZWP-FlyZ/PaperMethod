@@ -4,7 +4,7 @@ Created on 2018年12月12日
 
 @author: zwp
 '''
-from keras.initializers import glorot_uniform
+
 
 '''
 kreas矩阵分解实现预训练
@@ -41,7 +41,7 @@ f = 32;
 #训练次数
 epoch = 150
 # 学习速率
-learn_rate = 0.005;
+learn_rate = 0.01;
 # 
 batch_size=1;
 
@@ -132,7 +132,7 @@ def mf_bl_run(spa,case):
         model = get_model(hid_feat=f);
     
     if continue_train:
-        model.compile(optimizer=keras.optimizers.Adagrad(learn_rate), 
+        model.compile(optimizer=keras.optimizers.SGD(learn_rate), 
                   loss=keras.losses.mse, 
                   metrics=['mae'])
     
