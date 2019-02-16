@@ -32,12 +32,12 @@ isICF=False;
 
 
 # 训练例子
-spas=[10]
+spas=[2.5,5]
 case = [1,2,3,4,5];
 NoneValue = 0.0;
 
 # autoencoder 参数
-hidden_node = 64;
+hidden_node = 80;
 def get_hid_f(spa):
     if   spa==2.5:  return 48;
     elif spa==5.0:  return 48;
@@ -52,8 +52,7 @@ repeat = 350;
 rou=0.1
 
 # 协同过滤参数
-k = 11;
-sk = 17;
+
 def get_cf_k(spa):
     if   spa==2.5:  return 200;
     elif spa==5.0:  return 140;
@@ -70,7 +69,7 @@ def get_cf_sk(spa):
 def get_epoch(spa):
     if   spa==2.5:  return 600;
     elif spa==5.0:  return 600;
-    elif spa==10.0: return 600;
+    elif spa==10.0: return 200;
     elif spa==15.0: return 150;
     else:           return 120;
 
@@ -82,9 +81,9 @@ loc_w= 1.0;
 use_mf = False;
 
 # 加载AutoEncoder
-use_ae=False;
+use_ae=True;
 loadvalues= False;
-continue_train = False;
+continue_train = True;
 
 
 use_cf=True;

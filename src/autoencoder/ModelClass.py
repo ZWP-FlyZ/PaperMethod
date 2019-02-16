@@ -540,8 +540,8 @@ class CF():
                         * ana_item[idxk+3];
                 ws = ws * self.feat_w_us;
                 ws=np.sum(ws**2);
-                W[i,j]=W[j,i]= 1.0/math.exp(np.sqrt(ws/cot));
-#                 W[i,j]=W[j,i]= 1.0/np.sqrt(ws/cot);    
+                W[i,j]=W[j,i]= 1.0/math.exp(5*np.sqrt(ws/cot));
+#                 W[i,j]=W[j,i]= 1.0/(np.sqrt(ws/cot)+1)**15;    
     def ucf_w_(self,R,oriR=None):
         '''
         旧版本ucf相似度计算
