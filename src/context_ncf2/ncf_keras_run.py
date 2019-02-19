@@ -23,7 +23,7 @@ if SysCheck.check()=='l':
 origin_data = base_path+'/rtdata.txt';
 
 
-spas = [10];
+spas = [1];
 case = [1,2,3,4,5];
 
 def run(spa,case):

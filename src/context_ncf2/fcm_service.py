@@ -161,6 +161,51 @@ class Fcm():
         new_cent = new_cent/ new_cent_dw.reshape((-1,1));
         return new_cent,clu_rec,clu_result;
         pass;
+    
+    def _update_U_imped(self,data,uidx,cent,di=1):
+        '''
+        > 改进的模糊c运算方法
+        '''
+        m = self.m;
+        clu = self.clu;
+        clu_rec=[0]*clu;
+        ds = len(uidx);
+        clu_result=[[] for _ in range(clu)];
+        new_cent = np.zeros_like(cent);
+        new_cent_dw = np.zeros(clu);
+        for idx in uidx:
+            xj = data[idx];
+            dis_lg = haversine(cent[:,0],cent[:,1],xj[0],xj[1],r=di);
+            dis_lg = np.reshape(dis_lg,[-1,1])**2;
+            dis_oth = self._dis(cent[:,2:],xj[2:]).reshape(-1,1)**2;            
+            
+            v = np.concatenate((dis_lg,dis_oth),axis=1);
+            v = np.sum(v,axis=1);
+            
+            # 调节最小距离，避免接近中心的数据点权重过大
+            vidx = np.where(v<0.2);
+            v[vidx]=0.2;
+            v = (1.0/v)**(1.0/(m-1.0));
+            for c in range(clu):
+                tt = v[c]**m;
+                new_cent[c] += xj*tt;
+                new_cent_dw[c] += tt;
+                
+            max_idx = np.argmax(v);
+            clu_result[max_idx].append(idx);
+            clu_rec[max_idx] = clu_rec[max_idx]+1;
+            self.U[idx]= v;
+        
+        # 计算隶属度矩阵U
+        self.U[idx] = ds * self.U[idx] / np.sum(self.U[idx]);
+    
+        # 计算新中心
+        new_cent = new_cent/ new_cent_dw.reshape((-1,1));
+        return new_cent,clu_rec,clu_result;
+        pass;
+    
+    
+    
         
     def train(self,data,max_loop=100,max_e = 0.00001,di=1):
         '''
@@ -236,7 +281,7 @@ def run():
         data.append(lc);
     data=np.array(data);
 
-    fcm = Fcm(k,1.7);
+    fcm = Fcm(k,1.5);
     cent,res = fcm.train(data, max_loop=100, max_e=0.001,di=2)
     
     print(cent);
