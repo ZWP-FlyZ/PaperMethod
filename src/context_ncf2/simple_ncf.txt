@@ -1,1 +1,11 @@
 (NCF-2)spa=10.0 mae=0.446118 nmae=0.000000 time=Sat Feb 16 18:16:23 2019
+(NCF-2)spa=2.5 mae=0.396935 nmae=0.000000 time=Sat Feb 16 19:58:20 2019
+(NCF-2)spa=5.0 mae=0.368026 nmae=0.000000 time=Sat Feb 16 20:32:13 2019
+(NCF-2)spa=1.0 mae=0.493931 nmae=0.000000 time=Sat Feb 16 20:48:32 2019
+(NCF-2)spa=2.0 mae=0.405993 nmae=0.000000 time=Sat Feb 16 21:02:24 2019
+(NCF-2)spa=3.0 mae=0.388710 nmae=0.000000 time=Sat Feb 16 21:31:00 2019
+(NCF-2)spa=4.0 mae=0.373060 nmae=0.000000 time=Sat Feb 16 22:09:11 2019
+(NCF-2)spa=10.0 mae=0.335332 nmae=0.000000 time=Sat Feb 16 22:16:39 2019
+(NCF-2)spa=15.0 mae=0.324308 nmae=0.000000 time=Sun Feb 17 00:33:58 2019
+(NCF-2)spa=20.0 mae=0.316752 nmae=0.000000 time=Sun Feb 17 03:57:22 2019
+(NCF-2)spa=1.0 mae=0.487237 nmae=0.000000 time=Mon Feb 18 09:50:28 2019
