@@ -32,7 +32,7 @@ isICF=False;
 
 
 # 训练例子
-spas=[2.5,5]
+spas=[1,2,3,4]
 case = [1,2,3,4,5];
 NoneValue = 0.0;
 
@@ -71,19 +71,20 @@ def get_epoch(spa):
     elif spa==5.0:  return 600;
     elif spa==10.0: return 200;
     elif spa==15.0: return 150;
-    else:           return 120;
+    elif spa==20.0: return 120;
+    else:           return 600;
 
 
 loc_w= 1.0;
 
 
 #### 使用mf填补 
-use_mf = False;
+use_mf = True;
 
 # 加载AutoEncoder
 use_ae=True;
-loadvalues= False;
-continue_train = True;
+loadvalues= True;
+continue_train = False;
 
 
 use_cf=True;
@@ -216,10 +217,15 @@ def run(spa,case):
     aemodel_path=base_path+'/Dataset/dae_values/model_spa%.1f_case%d_mf%s.dp'%(spa,case,use_mf);
     if cut_rate==0:
         cf_model_path = base_path+'/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cfmod%d.dp'%(spa,case,use_mf,use_cf_mode);
+        cf_model_path_1 = base_path+'/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cfmod%d.dp'%(spa,case,use_mf,1);
+        cf_model_path_2 = base_path+'/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cfmod%d.dp'%(spa,case,use_mf,2);
     else:
         cf_model_path = base_path+ \
                 '/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cut%.1f_cfmod%d.dp'%(spa,case,use_mf,cut_rate,use_cf_mode);
-    
+        cf_model_path_1 = base_path+ \
+                '/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cut%.1f_cfmod%d.dp'%(spa,case,use_mf,cut_rate,use_cf_mode);
+        cf_model_path_2 = base_path+ \
+                '/Dataset/cf_values/model_spa%.1f_case%d_mf%s_cut%.1f_cfmod%d.dp'%(spa,case,use_mf,cut_rate,use_cf_mode);    
     mf_model_path=base_path+'/Dataset/mf_baseline_values/model_spa%.1f_case%d.dp'%(spa,case);
 
 
@@ -336,7 +342,13 @@ def run(spa,case):
         PR = R;
     tnow = time.time();
     if cf_loadmode:
-        cf_mode = pk.load(open(cf_model_path,"rb"));
+        if use_cf_mode != 3:
+            cf_mode = pk.load(open(cf_model_path,"rb"));
+        else:
+            cf_mode = pk.load(open(cf_model_path_2,"rb"));
+            cf_mode_1 = pk.load(open(cf_model_path_1,"rb"));
+            cf_mode.UW = cf_mode_1.UW;
+            cf_mode.mode = 3;
     else: 
         cf_mode = CF(us_shape,use_cf_mode);
         
@@ -347,8 +359,12 @@ def run(spa,case):
         cf_mode.ucf_S(near_lab_k);
     elif use_cf_mode==2:
         cf_mode.scf_S(near_lab_k);
+    elif use_cf_mode==3:
+        cf_mode.ucf_S(near_lab_k);
+        cf_mode.scf_S(near_lab_k);
+        
 
-    mae,nmae = cf_mode.evel(valR, oriR);
+    mae,nmae = cf_mode.evel(valR, oriR,0.2);
     print(mae,nmae);
     print ('训练CF结束，耗时 %.2f秒  \n'%((time.time() - tnow)));    
     return mae,nmae;

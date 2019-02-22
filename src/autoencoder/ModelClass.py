@@ -426,7 +426,7 @@ def f(R,oriR,start,end,feat_su):
                     * ana_item[idxk+3];
             ws = ws * feat_su;
             ws=np.sum(ws**2);
-            W[i,j]=W[j,i]= 1.0/np.exp(np.sqrt(ws/x_s));  
+            W[i,j]=W[j,i]= 1.0/np.exp(5*np.sqrt(ws/x_s));  
     return W;
 
 def f_(R,oriR,start,end,feat_su):
@@ -505,8 +505,8 @@ class CF():
             elif mode == 2:
                 tmp=self.pre_s(valu[i],vals[i],R);
             elif mode ==3:
-                tmp=u_s_rate*self.pre_u(valu[i],vals[i],R[0]);
-                tmp+=(1-u_s_rate)*self.pre_s(valu[i],vals[i],R[1]);
+                tmp=u_s_rate*self.pre_u(valu[i],vals[i],R);
+                tmp+=(1-u_s_rate)*self.pre_s(valu[i],vals[i],R);
             py[i]=  tmp;
         
         
@@ -540,7 +540,7 @@ class CF():
                         * ana_item[idxk+3];
                 ws = ws * self.feat_w_us;
                 ws=np.sum(ws**2);
-                W[i,j]=W[j,i]= 1.0/math.exp(5*np.sqrt(ws/cot));
+                W[i,j]=W[j,i]= 1.0/math.exp(1*np.sqrt(ws/cot));
 #                 W[i,j]=W[j,i]= 1.0/(np.sqrt(ws/cot)+1)**15;    
     def ucf_w_(self,R,oriR=None):
         '''
