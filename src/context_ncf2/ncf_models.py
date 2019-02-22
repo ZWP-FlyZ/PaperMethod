@@ -351,6 +351,141 @@ class context_ncf_bais():
         return min(val_rec),0;
         pass;
 
+class context_ncf2():
+    '''
+    由keras实现的ncf模型,输入包含u,s 和uw,sw
+    交叉模型
+    '''
+    
+    # 用户服务数量
+    uNum=None;
+    sNum=None;
+    uCluNum=None;# 用户簇数量
+    sCluNum=None;# 服务簇数量
+    
+    # 创建参数
+    creParm = None;
+
+    # ncf 模型
+    model = None;
+    
+    def __init__(self,NcfCreParam):
+        self.uNum,self.sNum=NcfCreParam.us_shape;
+        self.uCluNum,self.sCluNum=NcfCreParam.clu_num;
+        self.creParm = NcfCreParam;
+        self.model = self._get_model();
+        pass;    
+    
+    def _get_model(self,):
+        
+        # 潜在特征
+        hid_f = self.creParm.hid_feat;
+        # 网络单元数
+        units = self.creParm.hid_units;
+        reg_p = self.creParm.reg_p;
+        drop_p = self.creParm.drop_p;
+
+        # U,S 输入
+        input_u = Input(shape=(1,),dtype="int32");
+        input_s = Input(shape=(1,),dtype="int32");
+        
+        # U,S 对应的隶属度输入
+        input_uw = Input(shape=(self.uCluNum,),dtype="float32");
+        input_sw = Input(shape=(self.sCluNum,),dtype="float32");
+        
+        print(input_uw);
+        
+        # U,S交互的潜在特征
+        u_hid = HidFeatLayer(self.uNum,hid_f)(input_u);
+        s_hid = HidFeatLayer(self.sNum,hid_f)(input_s);
+        
+        # 隶属度潜在特征
+        uw_hid = Dense(hid_f,
+                activation=keras.activations.relu,
+                kernel_initializer= glorot_uniform(),
+                    kernel_regularizer=l2(reg_p))(input_uw);
+        sw_hid = Dense(hid_f,
+                activation=keras.activations.relu,
+                kernel_initializer= glorot_uniform(),
+                    kernel_regularizer=l2(reg_p))(input_sw);
+            
+        print(sw_hid);
+        # 连接               
+        out = Concatenate()([u_hid,s_hid]);
+        out2 = Concatenate()([uw_hid,sw_hid]);
+#         out = Concatenate()([u_hid,s_hid]);
+        print(out);
+        
+        out = Dense(16,
+                activation=keras.activations.relu,
+                kernel_initializer= glorot_uniform(),
+                kernel_regularizer=l2(reg_p))(out)
+                
+        out2 = Dense(16,
+                activation=keras.activations.relu,
+                kernel_initializer= glorot_uniform(),
+                kernel_regularizer=l2(reg_p))(out2)        
+
+        
+        out = Concatenate()([out,out2]);
+        
+        out = Dense(16,
+                activation=keras.activations.relu,
+                kernel_initializer= glorot_uniform(),
+                kernel_regularizer=l2(reg_p))(out)
+        
+        print(out);
+        
+        out = Dense(1,
+            activation=keras.activations.relu,
+            kernel_initializer= glorot_uniform())(out);            
+        print(out);
+        return Model(inputs=[input_u,input_s,input_uw,input_sw],outputs=out);
+        
+    def train(self,tp):
+        train_x,train_y = reoge_data_for_context(tp.train_data,tp.fcm_ws);
+        test_data = reoge_data_for_context(tp.test_data,tp.fcm_ws);
+        
+        bs = tp.batchsize;# batch_size
+        lr = tp.learn_rate;# 学习律
+        epoch = tp.epoch;# 迭代次数
+        need_load = tp.load_cache_rec;# 是否加载记录数据
+        load_path = tp.cache_rec_path;# 缓存路径
+        result_path =tp.result_file_path;# 结果文件
+        
+        ncf_model = self.model;
+        
+        # 回调处理
+        # 日志回调
+        myhis = LossHistory(result_path);
+        
+        
+        # early stop回调
+        ear_stop = keras.callbacks.EarlyStopping(monitor='val_mean_absolute_error',
+                            min_delta=0.0002,patience=4); 
+        #save回调
+        chkpoint = ModelCheckpoint(load_path, monitor='val_mean_absolute_error', 
+                                   save_best_only=False,
+                                   save_weights_only=True,  
+                                   mode='auto');
+                                   
+        rr = keras.callbacks.ReduceLROnPlateau(monitor='val_mean_absolute_error', factor=0.5, patience=2, 
+                               verbose=1, mode='auto', 
+                               cooldown=3, min_lr=0.0001)                           
+        
+                                   
+        ncf_model.compile(optimizer=Adagrad(lr), 
+              loss='mae', 
+              metrics=['mae']);
+        
+        his = ncf_model.fit(train_x,train_y,
+                      batch_size=bs,epochs=epoch,
+                      validation_data = test_data,
+                      callbacks=[chkpoint,myhis,ear_stop],
+                      verbose=1);
+        val_rec = his.history['val_mean_absolute_error'];
+        return min(val_rec),0;
+        pass;
 
 
 class context_ncf_():

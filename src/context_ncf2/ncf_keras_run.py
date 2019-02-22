@@ -23,7 +23,7 @@ if SysCheck.check()=='l':
 origin_data = base_path+'/rtdata.txt';
 
 
-spas = [1];
+spas = [5];
 case = [1,2,3,4,5];
 
 def run(spa,case):
@@ -75,8 +75,8 @@ def run(spa,case):
     u = trdata[:,0].astype(np.int32);
     s = trdata[:,1].astype(np.int32);
     R[u,s]=trdata[:,2];
-    umean = np.sum(R,axis=1)/np.count_nonzero(R, axis=1);
-    smean = np.sum(R,axis=0)/np.count_nonzero(R, axis=0);
+    umean = None;
+    smean = None;
     R[np.where(R>0)]=1.0;
 #     print(umean);
 #     print(smean);
@@ -103,7 +103,7 @@ def run(spa,case):
     
     '''
     
-    tp.learn_rate=0.025;
+    tp.learn_rate=0.02;
     tp.lr_decy_rate=1.0
     tp.lr_decy_step=int(n/tp.batch_size);
     tp.cache_rec_path=cache_path;
@@ -118,7 +118,7 @@ def run(spa,case):
     
     print ('训练模型开始');
     tnow = time.time();
-    model = context_ncf_bais(cp);
+    model = context_ncf(cp);
     
     mae,nmae = model.train(tp);
                      
