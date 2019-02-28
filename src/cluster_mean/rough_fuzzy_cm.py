@@ -46,25 +46,46 @@ class Rfcm():
     clu=0;# 聚类数量
     th=0.1# 聚类阈值
     w=0.8;# 计算中心时比重
-    
+    m=2;# 模糊度
     center=None;# 簇中心
     
-    def __init__(self,clu,thresdhold=0.1,w=0.8):
+    def __init__(self,clu,m=2,thresdhold=0.1,w=0.8):
         '''
         clu 聚类数量
         threshold： 判断是否为上界元素的距离界限。
         w：计算中心时，下界元素所占比重
         '''
-        self.clu=clu;self.th=thresdhold;self.w=w;
+        self.clu=clu;self.th=thresdhold;
+        self.w=w;self.m = m;
     
     def _dis(self,cent,x):
         return np.sqrt(np.sum((cent-x)**2,axis=1)) 
         
+    def _cal_u(self,dis):
+        # 计算隶属度
+        v = dis**(1.0/(self.m-1.0));
+        tmp_u = np.zeros((self.clu,));
+        for c in range(self.clu):
+            # 当前点若就是中心点时需要进行特殊处理
+            tt = np.divide(v[c],v,out=np.ones_like(v),where=v!=0);
+            tmp_u[c] = np.sum(tt)**(-1);        
+        return tmp_u;
+    
+    def _get_max2_idx(self,uj):
+        # 返回最大的两个隶属度的类
+        idx = np.argsort(uj);
+        return (idx[-1],idx[-2]);    
+        
+    
     
     def _update(self,data,up_idx,cent):
         clu = self.clu;
         clu_low = [[] for _ in range(clu)];
         clu_edge = [[] for _ in range(clu)];
+        
+        Ulow = np.zeros((len(up_idx),clu),float);# 下界的隶属度
+        Uedge = np.zeros((len(up_idx),clu),float);# 边界的隶属度
+        
         dim = data.shape[1];
         sumA = np.zeros((clu,dim));# 下界元素总和
         sumB = np.zeros((clu,dim));# 边界元素总和
@@ -72,31 +93,37 @@ class Rfcm():
         cotB = np.zeros((clu,));# 边界元素计数
         for jj in up_idx:
             xj = data[jj];
+            # 计算距离
             distance = self._dis(cent, xj);
-            ii = np.argmin(distance);# 距离最小的类
-            dmin = distance[ii];
-            flag=True;# 是否xj判断维下界元素的标志位
-            for ci in range(clu):
-                if ci == ii:continue; ## 跳过自身比较
-                elif abs(dmin - distance[ci])<self.th:
-                    # 存在相近的类，将其判断位边界元素
-                    flag=False;
-                    # 将xj加入到ci类的边界元素中
-                    sumB[ci] = sumB[ci]+xj;
-                    cotB[ci] += 1;
-                    clu_edge[ci].append(jj);
-                    
-            if(flag):
-                ## xj 是下界元素
-                sumA[ii] = sumA[ii]+xj;
-                cotA[ii] += 1;
-                clu_low[ii].append(jj);
+            
+            # 计算隶属度 #
+            uj = self._cal_u(distance);
+            
+            # 下界与边界分类 #
+            # 计算隶属度最大的两个簇
+            ci1,ci2 = self._get_max2_idx(uj);
+            if (abs(uj[ci1]-uj[ci2]))>self.th:
+                # xj 属于下界元素
+                sumA[ci1] = sumA[ci1]+xj;
+                cotA[ci1] += 1;
+                clu_low[ci1].append(jj);
+                # 将下界隶属度最高的类设置为1,其他类的隶属度为0
+                Ulow[jj,ci1]=1.0;
+                pass;
             else:
-                ## xj 是边界元素
-                sumB[ii] = sumB[ii]+xj;
-                cotB[ii] += 1;
-                clu_edge[ii].append(jj);    
-        
+                # xj 属于边界元素，将xj加入到ci1，ci2两个簇的边界中
+                clu_edge[ci1].append(jj);
+                clu_edge[ci2].append(jj);
+                Uedge[jj]=uj; # xj更新边界隶属度，xj的下界隶属度不变
+                tt = uj[ci1]**self.m;
+                sumB[ci1] = sumB[ci1]+xj*tt;
+                cotB[ci1] += tt;
+                tt = uj[ci2]**self.m;
+                sumB[ci2] = sumB[ci2]+xj*tt;
+                cotB[ci2] += tt;                
+                
+                pass;
+                    
         # 更新中心点
         ncent = np.zeros_like(cent);
         for ci in range(clu):
@@ -109,7 +136,10 @@ class Rfcm():
                 (1-self.w) * sumB[ci]/cotB[ci];
         
         err = np.sum(np.abs(ncent-cent));
-        return (clu_low,clu_edge),ncent,err,(cotA,cotB);
+        cotB = [];
+        for c in clu_edge:
+            cotB.append(len(c));
+        return (clu_low,clu_edge),ncent,err,(cotA,cotB),(Ulow,Uedge);
         
     
     def train(self,data,max_loop=100,max_e = 0.00001):
@@ -124,7 +154,7 @@ class Rfcm():
         
         while epo<=max_loop:
             np.random.shuffle(updata_idx);# 随机训练顺序
-            res,ncent,err,rec= self._update(data, updata_idx, self.center);
+            res,ncent,err,rec,memU= self._update(data, updata_idx, self.center);
             print('epoch=%d \terr=%.6f \tclu_ele_rec=%s,%s'%(epo,err,str(rec[0]),str(rec[1])));
             print();
             self.center=ncent;
@@ -200,15 +230,15 @@ def show_plt(data,clz_ds,py,py2):
 
 if __name__ == '__main__':
 
-#     np.random.seed(12121212);
+    np.random.seed(12121212);
 
     clz_ds = 300;
-    X,Y = get_dataset([(1,1),(1,2),(2,2),(2,1)],clz_ds=clz_ds,sig=0.24, noise=False)
+    X,Y = get_dataset([(1,1),(1,2),(2,2),(2,1)],clz_ds=clz_ds,sig=0.27, noise=False)
     print(X);
     print(Y);
     # 数值m越小，类别之间的隶属度差异越大，增强了分类效果，强者越强，弱者越弱
     # m相当于模糊边界，越接近1，越像HCM，传统m的范围在[1.5-2.5]之间。
-    rcm = Rfcm(4,0.08,0.8);
+    rcm = Rfcm(4,2.0,0.1,0.9);
     py = rcm.train(X, 100, max_e=0.00001);
 
     cent,res =simple_km(X, 4);
