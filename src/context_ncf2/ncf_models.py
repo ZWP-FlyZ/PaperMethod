@@ -133,7 +133,7 @@ class context_ncf():
         input_sw = Input(shape=(self.sCluNum,),dtype="float32");
         
         print(input_uw);
-        
+        print(input_sw);
         # U,S交互的潜在特征
         u_hid = HidFeatLayer(self.uNum,hid_f)(input_u);
         s_hid = HidFeatLayer(self.sNum,hid_f)(input_s);
