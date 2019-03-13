@@ -32,7 +32,7 @@ isICF=False;
 
 
 # 训练例子
-spas=[1,2,3,4]
+spas=[2.5]
 case = [1,2,3,4,5];
 NoneValue = 0.0;
 
@@ -88,8 +88,8 @@ continue_train = False;
 
 
 use_cf=True;
-use_cf_mode = 1; # 1:UCF 2:SCF
-cf_loadmode=False;
+use_cf_mode = 3; # 1:UCF 2:SCF
+cf_loadmode=True;
 cf_continue_train= not cf_loadmode;
 
 
@@ -364,7 +364,7 @@ def run(spa,case):
         cf_mode.scf_S(near_lab_k);
         
 
-    mae,nmae = cf_mode.evel(valR, oriR,0.2);
+    mae,nmae = cf_mode.evel(valR, oriR,0);
     print(mae,nmae);
     print ('训练CF结束，耗时 %.2f秒  \n'%((time.time() - tnow)));    
     return mae,nmae;
