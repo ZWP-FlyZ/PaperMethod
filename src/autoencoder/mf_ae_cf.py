@@ -32,8 +32,8 @@ isICF=False;
 
 
 # 训练例子
-spas=[2.5]
-case = [1,2,3,4,5];
+spas=[1.0]
+case = [1];
 NoneValue = 0.0;
 
 # autoencoder 参数
@@ -83,13 +83,13 @@ use_mf = True;
 
 # 加载AutoEncoder
 use_ae=True;
-loadvalues= True;
-continue_train = False;
+loadvalues= False;
+continue_train = True;
 
 
 use_cf=True;
-use_cf_mode = 3; # 1:UCF 2:SCF
-cf_loadmode=True;
+use_cf_mode = 1; # 1:UCF 2:SCF
+cf_loadmode=False;
 cf_continue_train= not cf_loadmode;
 
 
@@ -101,7 +101,9 @@ cut_rate = 0;
 #预处理填补比例
 def out_cmp_rat(spa):
 #     return spa/100;
-    if spa<5:return 0.025;
+    if spa == 1.0:return 0.01;
+    elif spa ==2.5:return 0.025;
+    elif spa==5:return 0.025;
     elif spa==5:return 0.05;
     elif spa==10:return 0.15;
     elif spa==15:return 0.20;
