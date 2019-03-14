@@ -32,7 +32,7 @@ isICF=False;
 
 
 # 训练例子
-spas=[1.0]
+spas=[5]
 case = [1];
 NoneValue = 0.0;
 
@@ -54,7 +54,8 @@ rou=0.1
 # 协同过滤参数
 
 def get_cf_k(spa):
-    if   spa==2.5:  return 200;
+    if spa == 1.0:return 200;
+    elif   spa==2.5:  return 200;
     elif spa==5.0:  return 140;
     elif spa==10.0: return 80;
     elif spa==15.0: return 50;
@@ -67,7 +68,8 @@ def get_cf_sk(spa):
     else:           return 70; 
 
 def get_epoch(spa):
-    if   spa==2.5:  return 600;
+    if   sp==1.0: return  200;
+    elif   spa==2.5:  return 200;
     elif spa==5.0:  return 600;
     elif spa==10.0: return 200;
     elif spa==15.0: return 150;
@@ -79,12 +81,12 @@ loc_w= 1.0;
 
 
 #### 使用mf填补 
-use_mf = True;
+use_mf = False;
 
 # 加载AutoEncoder
 use_ae=True;
 loadvalues= False;
-continue_train = True;
+continue_train = not loadvalues;
 
 
 use_cf=True;
@@ -101,10 +103,9 @@ cut_rate = 0;
 #预处理填补比例
 def out_cmp_rat(spa):
 #     return spa/100;
-    if spa == 1.0:return 0.01;
-    elif spa ==2.5:return 0.025;
-    elif spa==5:return 0.025;
-    elif spa==5:return 0.05;
+    if spa == 1.0:return 0.06;
+    elif spa ==2.5:return 0.1;
+    elif spa==5:return 0.14;
     elif spa==10:return 0.15;
     elif spa==15:return 0.20;
     elif spa==20:return 0.25;
@@ -182,7 +183,7 @@ def mf_rat_in2(R,mf,rat,seed=2121212):
         top = int(rat*batch_size);
         
     delta = top-sum_arr;
-    random.seed(seed);
+#     random.seed(seed);
     all_range= np.arange(batch_size,dtype=np.int);
     for feat in range(feat_size):
         if delta[feat]<=0:continue;
