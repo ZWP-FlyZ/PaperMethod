@@ -261,7 +261,7 @@ def run():
     data=[];
     names=[];
     area=[];
-    k=3;
+    k=128;
     for uid in range(339):
         un = user_loc[uid][1];
         names.append(un);
@@ -276,8 +276,8 @@ def run():
     data=np.array(data);
 
     # 1.2-1.3
-    fcm = Fcm(k,2);
-    cent,res = fcm.train(data, max_loop=100, max_e=0.00001,di=k)
+    fcm = Fcm(k,1.7);
+    cent,res = fcm.train(data, max_loop=100, max_e=0.00001,di=1)
 
 #     cent,res = simple_km2(data,k,k);
     
@@ -298,6 +298,67 @@ def run():
         
 
     pass;
+
+
+def run_out(ck):
+    
+    user_loc = localload.load_userinfo(user_info_path)
+    user_loc_m = localload.load_locmore(user_info_more_path);
+    R = np.loadtxt(origin_path,np.float);
+    if os.path.isfile(fcm_w_out):
+        os.remove(fcm_w_out);
+
+    idx = np.where(R<0);
+    R[idx]=0;
+    
+    user_sum = np.sum(R,axis=1);
+    user_cot = np.count_nonzero(R, axis=1);
+    user_mean = np.divide(user_sum,user_cot,
+        out=np.zeros_like(user_sum),where=user_cot!=0);
+    all_mean = np.sum(user_sum)/np.sum(user_cot);
+    user_mean[np.where(user_cot==0)] = all_mean;
+    
+    data=[];
+    names=[];
+    area=[];
+    k=ck;
+    for uid in range(339):
+        un = user_loc[uid][1];
+        names.append(un);
+        area.append(user_loc_m[un][0])
+        lc = [];
+        lc.extend(user_loc[uid][2]);
+        lc.extend(user_loc[uid][3][:2]);#ip前两域
+        lc.append(user_mean[uid]);# 均值
+        
+        
+        data.append(lc);
+    data=np.array(data);
+
+    # 1.2-1.3
+    fcm = Fcm(k,1.7);
+    cent,res = fcm.train(data, max_loop=100, max_e=0.00001,di=1)
+
+#     cent,res = simple_km2(data,k,k);
+    
+    print(cent);
+    print(res);
+    np.savetxt(fcm_w_out, fcm.U, '%.6f');
+    
+    for i in range(k):
+        tmp=[];
+        tmp2=[];
+        for id in res[i]:
+            if names[id] not in tmp2:
+                tmp2.append(names[id]);
+                tmp.append(area[id]);
+        print(tmp)
+        print(tmp2);
+        print();
+        
+
+    pass;
+
 
 if __name__ == '__main__':
     run();

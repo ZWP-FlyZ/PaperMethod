@@ -15,7 +15,7 @@ from tools import SysCheck;
 from context_ncf2.ncf_param import NcfTraParm,NcfCreParam;
 from context_ncf2.ncf_models import *;
 from tools.fwrite import fwrite_append
-
+from context_ncf2 import fcm_user;
 
 base_path = r'E:/work';
 if SysCheck.check()=='l':
@@ -23,8 +23,8 @@ if SysCheck.check()=='l':
 origin_data = base_path+'/rtdata.txt';
 
 
-spas = [5];
-case = [1,2,3,4,5];
+spas = [2];
+case = [1,2];
 
 def run(spa,case):
     train_path = base_path+'/Dataset/ws/train_n/sparseness%.1f/training%d.txt'%(spa,case);
@@ -34,15 +34,16 @@ def run(spa,case):
     dbug_paht = 'E:/work/Dataset/wst64/rtdata1.txt';
     
     
-    user_fcm_w_path = base_path+'/Dataset/ws/localinfo/user_rfcm_w.txt';
-    service_fcm_w_path = base_path+'/Dataset/ws/localinfo/service_rfcm_w.txt';
+    #### 根据情况更改下面的路径 ########
+    user_fcm_w_path = base_path+'/Dataset/ws/localinfo/user_fcm_w.txt';
+    service_fcm_w_path = base_path+'/Dataset/ws/localinfo/service_fcm_w.txt';
     
     print('开始实验，稀疏度=%.1f,case=%d'%(spa,case));
     print ('加载训练数据开始');
     now = time.time();
     trdata = np.loadtxt(train_path, dtype=float);
-    user_fcm_w = np.loadtxt(user_fcm_w_path, dtype=float);
-    service_fcm_w = np.loadtxt(service_fcm_w_path, dtype=float);
+    user_fcm_w = np.loadtxt(user_fcm_w_path, dtype=float).reshape(339,-1);
+    service_fcm_w = np.loadtxt(service_fcm_w_path, dtype=float).reshape(5825,-1);
     n = np.alen(trdata);
     print ('加载训练数据完成，耗时 %.2f秒，数据总条数%d  \n'%((time.time() - now),n));
     
@@ -65,8 +66,9 @@ def run(spa,case):
     tp = NcfTraParm();
     cp.us_shape=(339,5825);
     cp.clu_num=(user_fcm_w.shape[1],service_fcm_w.shape[1]);
-    cp.hid_feat=12;
-    cp.hid_units=[26,13];
+    cp.hid_feat=16;
+    cp.hid_feat2=16;
+    cp.hid_units=[32,16];
     cp.drop_p=0
     cp.reg_p=0
     
@@ -103,7 +105,7 @@ def run(spa,case):
     
     '''
     
-    tp.learn_rate=0.02;
+    tp.learn_rate=0.03;
     tp.lr_decy_rate=1.0
     tp.lr_decy_step=int(n/tp.batch_size);
     tp.cache_rec_path=cache_path;
@@ -120,23 +122,48 @@ def run(spa,case):
     tnow = time.time();
     model = context_ncf(cp);
     
-    mae,nmae = model.train(tp);
+    mae,rmse = model.train(tp);
                      
     print ('训练模型结束，耗时 %.2f秒  \n'%((time.time() - tnow)));  
 
     print('实验结束，总耗时 %.2f秒,稀疏度=%.1f\n'%((time.time()-now),spa));
     
-    return mae,nmae;
+    return mae,rmse;
 
 if __name__ == '__main__':
-    for sp in spas:
-        s = 0;s2=0;cot=0;
-        for ca in case:
-            for i in range(1):
-                mae,nmae = run(sp,ca);
-                s+=mae;
-                s2+=nmae;
-                cot+=1;
-        out_s = '(NCF-2)spa=%.1f mae=%.6f nmae=%.6f time=%s'%(sp,s/cot,s2/cot,time.asctime());
-        print(out_s);
-        fwrite_append('./simple_rfcm_ncf.txt',out_s);
+#     for sp in spas:
+#         s = 0;s2=0;cot=0;
+#         for ca in case:
+#             for i in range(1):
+#                 mae,nmae = run(sp,ca);
+#                 s+=mae;
+#                 s2+=nmae;
+#                 cot+=1;
+#         out_s = '(NCF-2)spa=%.1f mae=%.6f rmse=%.6f time=%s'%(sp,s/cot,s2/cot,time.asctime());
+#         print(out_s);
+#         fwrite_append('./simple_rfcm_ncf.txt',out_s);
+        
+        
+    ########### User clusture #############
+    
+    
+    userclust=[1,2,4,8,16,32,64,128]
+    for ucc in userclust:
+        fcm_user.run_out(ucc);
+        for sp in spas:
+            s = 0;s2=0;cot=0;
+            for ca in case:
+                for i in range(1):
+                    mae,nmae = run(sp,ca);
+                    s+=mae;
+                    s2+=nmae;
+                    cot+=1;
+            out_s = '(NCF-2)spa=%.1f mae=%.6f rmse=%.6f ucc=%d time=%s'%(sp,s/cot,s2/cot,ucc,time.asctime());
+            print(out_s);
+            fwrite_append('./simple_rfcm_ncf.txt',out_s);
+    
+        
+        
+        
+        
+        

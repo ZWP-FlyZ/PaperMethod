@@ -12,6 +12,7 @@ class NcfCreParam():
     us_shape=None;# 用户服务数量二元组
     clu_num = (1,1);
     hid_feat=0;# 隐含矩阵特征数
+    hid_feat2=0;# 隐含矩阵特征数
     hid_units=[]; # 网络各个隐层隐含单元数
     reg_p = 0.01;
     drop_p=0.001;

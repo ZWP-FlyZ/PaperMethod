@@ -91,6 +91,12 @@ class BiasLayer(Layer):
         return (input_shape[0], self.output_dim)
 
 
+
+
+def root_mean_squared_error(y_true, y_pred):
+        return K.sqrt(K.mean(K.square(y_pred - y_true))) 
+
+
 class context_ncf():
     '''
     由keras实现的ncf模型,输入包含u,s 和uw,sw
@@ -119,6 +125,7 @@ class context_ncf():
         
         # 潜在特征
         hid_f = self.creParm.hid_feat;
+        hid_f2 = self.creParm.hid_feat2;
         # 网络单元数
         units = self.creParm.hid_units;
         reg_p = self.creParm.reg_p;
@@ -139,18 +146,16 @@ class context_ncf():
         s_hid = HidFeatLayer(self.sNum,hid_f)(input_s);
         
         # 隶属度潜在特征
-        uw_hid = Dense(hid_f,
+        uw_hid = Dense(hid_f2,
                 activation=keras.activations.relu,
                 kernel_initializer= glorot_uniform(),
                     kernel_regularizer=l2(reg_p))(input_uw);
-        sw_hid = Dense(hid_f,
+        sw_hid = Dense(hid_f2,
                 activation=keras.activations.relu,
                 kernel_initializer= glorot_uniform(),
                     kernel_regularizer=l2(reg_p))(input_sw);
         
 
-        
-                    
         print(sw_hid);
         # 连接               
         out = Concatenate()([u_hid,s_hid,uw_hid,sw_hid]);
@@ -194,7 +199,7 @@ class context_ncf():
         
         # early stop回调
         ear_stop = keras.callbacks.EarlyStopping(monitor='val_mean_absolute_error',
-                            min_delta=0.0002,patience=10); 
+                            min_delta=0.00002,patience=4); 
         #save回调
         chkpoint = ModelCheckpoint(load_path, monitor='val_mean_absolute_error', 
                                    save_best_only=False,
@@ -208,7 +213,7 @@ class context_ncf():
                                    
         ncf_model.compile(optimizer=Adagrad(lr), 
               loss='mae', 
-              metrics=['mae']);
+              metrics=['mae',root_mean_squared_error]);
         
         his = ncf_model.fit(train_x,train_y,
                       batch_size=bs,epochs=epoch,
@@ -216,7 +221,8 @@ class context_ncf():
                       callbacks=[chkpoint,myhis,ear_stop],
                       verbose=1);
         val_rec = his.history['val_mean_absolute_error'];
-        return min(val_rec),0;
+        val_rec2 = his.history['val_root_mean_squared_error'];
+        return min(val_rec),min(val_rec2);
         pass;
 
 class context_ncf_bais():
@@ -476,7 +482,7 @@ class context_ncf2():
                                    
         ncf_model.compile(optimizer=Adagrad(lr), 
               loss='mae', 
-              metrics=['mae']);
+              metrics=['mae',root_mean_squared_error]);
         
         his = ncf_model.fit(train_x,train_y,
                       batch_size=bs,epochs=epoch,
@@ -484,7 +490,8 @@ class context_ncf2():
                       callbacks=[chkpoint,myhis,ear_stop],
                       verbose=1);
         val_rec = his.history['val_mean_absolute_error'];
-        return min(val_rec),0;
+        val_rec2 = his.history['val_root_mean_squared_error'];
+        return min(val_rec),min(val_rec2);
         pass;
 
 
