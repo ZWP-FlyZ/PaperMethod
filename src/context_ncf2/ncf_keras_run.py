@@ -66,6 +66,7 @@ def run(spa,case):
     cp.us_shape=(339,5825);
     cp.clu_num=(user_fcm_w.shape[1],service_fcm_w.shape[1]);
     cp.hid_feat=16;
+    cp.hid_feat2=16;
     cp.hid_units=[32,16];
     cp.drop_p=0
     cp.reg_p=0

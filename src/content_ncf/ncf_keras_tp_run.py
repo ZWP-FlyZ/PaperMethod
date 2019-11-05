@@ -24,7 +24,7 @@ origin_data = base_path+'/rtdata.txt';
 
 
 spas = [5,10,15,20];
-case = [1,2];
+case = [3,4,5];
 
 def run(spa,case):
     train_path = base_path+'/Dataset/ws/train_tp/sparseness%.1f/training%d.txt'%(spa,case);
@@ -63,6 +63,7 @@ def run(spa,case):
     tp = NcfTraParm();
     cp.us_shape=(339,5825);
     cp.hid_feat=16;
+    cp.hid_feat2=16;
     cp.hid_units=[32,16];
     cp.drop_p=0
     cp.reg_p=0

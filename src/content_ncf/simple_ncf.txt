@@ -71,3 +71,5 @@ spa=20.0 mae=0.321502 nmae=0.000000 time=Wed Jan 16 04:56:22 2019
 (NCF-FEAT)spa=10.0 mae=20.127248 nmae=37.376523 time=Wed Nov  6 09:06:14 2019
 (NCF-FEAT)spa=15.0 mae=18.613923 nmae=34.487413 time=Wed Nov  6 09:38:52 2019
 (NCF-FEAT)spa=20.0 mae=18.058645 nmae=33.655200 time=Wed Nov  6 10:25:01 2019
+(NCF-FEAT)spa=5.0 mae=22.252064 nmae=41.095580 time=Wed Nov  6 12:41:11 2019
+(NCF-FEAT)spa=10.0 mae=20.524826 nmae=38.119629 time=Wed Nov  6 13:15:05 2019

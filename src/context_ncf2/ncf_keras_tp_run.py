@@ -24,12 +24,12 @@ origin_data = base_path+'/rtdata.txt';
 
 
 spas = [5];
-case = [1,2,3,4,5];
+case = [1];
 
 def run(spa,case):
     train_path = base_path+'/Dataset/ws/train_tp/sparseness%.1f/training%d.txt'%(spa,case);
     test_path = base_path+'/Dataset/ws/test_tp/sparseness%.1f/test%d.txt'%(spa,case);
-    cache_path = base_path+'/Dataset/context_ncf_tp_values/spa%.1f_case%d.h5'%(spa,case);
+    cache_path = base_path+'/Dataset/context_ncf_values/tp_spa%.1f_case%d.h5'%(spa,case);
     result_file= './result/tp_ws_spa%.1f_case%d.txt'%(spa,case);
     dbug_paht = 'E:/work/Dataset/wst64/rtdata1.txt';
     
@@ -66,6 +66,7 @@ def run(spa,case):
     cp.us_shape=(339,5825);
     cp.clu_num=(user_fcm_w.shape[1],service_fcm_w.shape[1]);
     cp.hid_feat=16;
+    cp.hid_feat2=16;
     cp.hid_units=[32,16];
     cp.drop_p=0
     cp.reg_p=0
@@ -103,7 +104,7 @@ def run(spa,case):
     
     '''
     
-    tp.learn_rate=0.02;
+    tp.learn_rate=0.03;
     tp.lr_decy_rate=1.0
     tp.lr_decy_step=int(n/tp.batch_size);
     tp.cache_rec_path=cache_path;
