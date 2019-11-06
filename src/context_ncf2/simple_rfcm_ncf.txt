@@ -80,3 +80,183 @@ severc=4
 
 severc=8
 
+(NCF-2)spa=2.0 mae=0.420695 rmse=0.747691 ucc=1 time=Sat Apr 20 09:17:10 2019
+(NCF-2)spa=2.0 mae=0.652374 rmse=1.075370 ucc=2 time=Sat Apr 20 09:18:54 2019
+(NCF-2)spa=2.0 mae=0.415259 rmse=0.737239 ucc=4 time=Sat Apr 20 09:20:59 2019
+(NCF-2)spa=2.0 mae=0.419178 rmse=0.743966 ucc=8 time=Sat Apr 20 09:23:26 2019
+(NCF-2)spa=2.0 mae=0.419327 rmse=0.743660 ucc=16 time=Sat Apr 20 09:25:59 2019
+(NCF-2)spa=2.0 mae=0.417832 rmse=0.742798 ucc=32 time=Sat Apr 20 09:28:42 2019
+(NCF-2)spa=2.0 mae=0.416909 rmse=0.739108 ucc=64 time=Sat Apr 20 09:31:36 2019
+(NCF-2)spa=2.0 mae=0.416763 rmse=0.739541 ucc=128 time=Sat Apr 20 09:35:18 2019
+
+serverc=16
+(NCF-2)spa=2.0 mae=0.414998 rmse=0.731464 ucc=1 time=Sat Apr 20 09:58:14 2019
+(NCF-2)spa=2.0 mae=0.416246 rmse=0.737002 ucc=2 time=Sat Apr 20 10:00:18 2019
+(NCF-2)spa=2.0 mae=0.412308 rmse=0.732766 ucc=4 time=Sat Apr 20 10:02:30 2019
+(NCF-2)spa=2.0 mae=0.411328 rmse=0.731212 ucc=8 time=Sat Apr 20 10:04:50 2019
+(NCF-2)spa=2.0 mae=0.408754 rmse=0.725365 ucc=16 time=Sat Apr 20 10:07:11 2019
+(NCF-2)spa=2.0 mae=0.408402 rmse=0.726475 ucc=32 time=Sat Apr 20 10:09:39 2019
+(NCF-2)spa=2.0 mae=0.414266 rmse=0.734408 ucc=64 time=Sat Apr 20 10:12:42 2019
+(NCF-2)spa=2.0 mae=0.408703 rmse=0.725654 ucc=128 time=Sat Apr 20 10:16:33 2019
+(NCF-2)spa=2.0 mae=0.415315 rmse=0.739547 ucc=64 time=Sat Apr 20 10:54:12 2019
+(NCF-2)spa=2.0 mae=0.418143 rmse=0.743023 ucc=64 time=Sat Apr 20 11:03:15 2019
+(NCF-2)spa=2.0 mae=0.417847 rmse=0.740221 ucc=128 time=Sat Apr 20 11:05:37 2019
+
+32
+(NCF-2)spa=2.0 mae=0.405143 rmse=0.715211 ucc=1 time=Sat Apr 20 12:39:22 2019
+(NCF-2)spa=2.0 mae=0.403388 rmse=0.714335 ucc=2 time=Sat Apr 20 12:41:16 2019
+(NCF-2)spa=2.0 mae=0.399340 rmse=0.712216 ucc=4 time=Sat Apr 20 12:43:15 2019
+(NCF-2)spa=2.0 mae=0.398515 rmse=0.708181 ucc=8 time=Sat Apr 20 12:45:04 2019
+(NCF-2)spa=2.0 mae=0.396878 rmse=0.704927 ucc=16 time=Sat Apr 20 12:47:14 2019
+(NCF-2)spa=2.0 mae=0.399504 rmse=0.711162 ucc=32 time=Sat Apr 20 12:49:25 2019
+(NCF-2)spa=2.0 mae=0.402909 rmse=0.715596 ucc=64 time=Sat Apr 20 12:51:49 2019
+(NCF-2)spa=2.0 mae=0.399531 rmse=0.706973 ucc=128 time=Sat Apr 20 12:54:59 2019
+
+128
+(NCF-2)spa=2.0 mae=0.420482 rmse=0.717512 ucc=1 time=Sat Apr 20 14:55:27 2019
+(NCF-2)spa=2.0 mae=0.391665 rmse=0.693511 ucc=2 time=Sat Apr 20 14:57:10 2019
+(NCF-2)spa=2.0 mae=0.389363 rmse=0.693131 ucc=4 time=Sat Apr 20 14:59:05 2019
+(NCF-2)spa=2.0 mae=0.392416 rmse=0.697495 ucc=8 time=Sat Apr 20 15:00:52 2019
+(NCF-2)spa=2.0 mae=0.389972 rmse=0.691199 ucc=16 time=Sat Apr 20 15:02:54 2019
+(NCF-2)spa=2.0 mae=0.398879 rmse=0.706315 ucc=32 time=Sat Apr 20 15:05:22 2019
+(NCF-2)spa=2.0 mae=0.390732 rmse=0.693447 ucc=64 time=Sat Apr 20 15:07:56 2019
+(NCF-2)spa=2.0 mae=0.396827 rmse=0.698534 ucc=128 time=Sat Apr 20 15:11:43 2019
+
+sm=1.05
+(NCF-2)spa=2.0 mae=0.411441 rmse=0.730866 ucc=1.05 time=Mon Apr 22 09:10:44 2019
+(NCF-2)spa=2.0 mae=0.410715 rmse=0.728365 ucc=1.10 time=Mon Apr 22 09:15:25 2019
+(NCF-2)spa=2.0 mae=0.405726 rmse=0.722506 ucc=1.30 time=Mon Apr 22 09:19:57 2019
+(NCF-2)spa=2.0 mae=0.407149 rmse=0.721474 ucc=1.50 time=Mon Apr 22 09:25:48 2019
+(NCF-2)spa=2.0 mae=0.412181 rmse=0.730830 ucc=2.00 time=Mon Apr 22 09:31:10 2019
+(NCF-2)spa=2.0 mae=0.412903 rmse=0.732128 ucc=2.50 time=Mon Apr 22 09:37:01 2019
+(NCF-2)spa=2.0 mae=0.413460 rmse=0.733451 ucc=3.00 time=Mon Apr 22 10:03:03 2019
+(NCF-2)spa=2.0 mae=0.415274 rmse=0.735460 ucc=3.50 time=Mon Apr 22 10:07:52 2019
+
+sm=1.3
+
+(NCF-2)spa=2.0 mae=0.405841 rmse=0.721530 ucc=1.05 time=Mon Apr 22 10:17:47 2019
+(NCF-2)spa=2.0 mae=0.405586 rmse=0.720629 ucc=1.10 time=Mon Apr 22 10:21:38 2019
+(NCF-2)spa=2.0 mae=0.406529 rmse=0.723359 ucc=1.30 time=Mon Apr 22 10:26:25 2019
+(NCF-2)spa=2.0 mae=0.409963 rmse=0.726212 ucc=1.50 time=Mon Apr 22 10:31:16 2019
+(NCF-2)spa=2.0 mae=0.406564 rmse=0.722411 ucc=2.00 time=Mon Apr 22 10:37:07 2019
+(NCF-2)spa=2.0 mae=0.406615 rmse=0.722826 ucc=2.50 time=Mon Apr 22 10:42:50 2019
+(NCF-2)spa=2.0 mae=0.407123 rmse=0.722989 ucc=3.00 time=Mon Apr 22 10:49:12 2019
+(NCF-2)spa=2.0 mae=0.408669 rmse=0.724591 ucc=3.50 time=Mon Apr 22 10:56:47 2019
+
+sm=1.2
+
+(NCF-2)spa=2.0 mae=0.404169 rmse=0.718016 ucc=1.05 time=Mon Apr 22 11:34:05 2019
+(NCF-2)spa=2.0 mae=0.407600 rmse=0.723750 ucc=1.10 time=Mon Apr 22 11:38:35 2019
+(NCF-2)spa=2.0 mae=0.405036 rmse=0.720468 ucc=1.30 time=Mon Apr 22 11:43:17 2019
+(NCF-2)spa=2.0 mae=0.404492 rmse=0.719476 ucc=1.50 time=Mon Apr 22 11:48:17 2019
+(NCF-2)spa=2.0 mae=0.406332 rmse=0.722084 ucc=2.00 time=Mon Apr 22 11:53:59 2019
+(NCF-2)spa=2.0 mae=0.408606 rmse=0.727284 ucc=2.50 time=Mon Apr 22 12:00:24 2019
+(NCF-2)spa=2.0 mae=0.414803 rmse=0.739989 ucc=3.00 time=Mon Apr 22 12:05:50 2019
+(NCF-2)spa=2.0 mae=0.410337 rmse=0.726621 ucc=3.50 time=Mon Apr 22 12:11:46 2019
+(NCF-2)spa=2.0 mae=0.402803 rmse=0.716665 ucc=1.05 time=Mon Apr 22 12:17:34 2019
+(NCF-2)spa=2.0 mae=0.410681 rmse=0.729277 ucc=3.00 time=Mon Apr 22 12:21:46 2019
+
+2m=1.5
+(NCF-2)spa=2.0 mae=0.403356 rmse=0.718882 ucc=1.05 time=Mon Apr 22 12:30:39 2019
+(NCF-2)spa=2.0 mae=0.399778 rmse=0.709480 ucc=1.10 time=Mon Apr 22 12:34:37 2019
+(NCF-2)spa=2.0 mae=0.399731 rmse=0.710026 ucc=1.30 time=Mon Apr 22 12:38:42 2019
+(NCF-2)spa=2.0 mae=0.396477 rmse=0.703569 ucc=1.50 time=Mon Apr 22 12:42:53 2019
+(NCF-2)spa=2.0 mae=0.400064 rmse=0.708212 ucc=2.00 time=Mon Apr 22 12:47:18 2019
+(NCF-2)spa=2.0 mae=0.398107 rmse=0.707181 ucc=2.50 time=Mon Apr 22 12:52:46 2019
+(NCF-2)spa=2.0 mae=0.399305 rmse=0.707850 ucc=3.00 time=Mon Apr 22 12:58:18 2019
+(NCF-2)spa=2.0 mae=0.399601 rmse=0.708355 ucc=3.50 time=Mon Apr 22 13:05:07 2019
+
+sm=2.0
+(NCF-2)spa=2.0 mae=0.403017 rmse=0.716003 ucc=1.05 time=Mon Apr 22 13:14:37 2019
+(NCF-2)spa=2.0 mae=0.407121 rmse=0.724497 ucc=1.10 time=Mon Apr 22 13:18:32 2019
+(NCF-2)spa=2.0 mae=0.404635 rmse=0.720624 ucc=1.30 time=Mon Apr 22 13:23:34 2019
+(NCF-2)spa=2.0 mae=0.402597 rmse=0.714010 ucc=1.50 time=Mon Apr 22 13:28:31 2019
+(NCF-2)spa=2.0 mae=0.403349 rmse=0.717594 ucc=2.00 time=Mon Apr 22 13:33:54 2019
+(NCF-2)spa=2.0 mae=0.406205 rmse=0.720249 ucc=2.50 time=Mon Apr 22 13:39:52 2019
+(NCF-2)spa=2.0 mae=0.403654 rmse=0.717142 ucc=3.00 time=Mon Apr 22 13:46:18 2019
+(NCF-2)spa=2.0 mae=0.408473 rmse=0.721732 ucc=3.50 time=Mon Apr 22 13:53:06 2019
+(NCF-2)spa=2.0 mae=0.405412 rmse=0.719593 ucc=2.50 time=Mon Apr 22 14:03:28 2019
+(NCF-2)spa=2.0 mae=0.410769 rmse=0.725506 ucc=3.50 time=Mon Apr 22 14:08:15 2019
+
+sm=2.5
+(NCF-2)spa=2.0 mae=0.415019 rmse=0.734210 ucc=1.05 time=Mon Apr 22 14:47:17 2019
+(NCF-2)spa=2.0 mae=0.414630 rmse=0.735541 ucc=1.10 time=Mon Apr 22 14:52:35 2019
+(NCF-2)spa=2.0 mae=0.418627 rmse=0.740218 ucc=1.30 time=Mon Apr 22 14:58:02 2019
+(NCF-2)spa=2.0 mae=0.414252 rmse=0.733430 ucc=1.50 time=Mon Apr 22 15:04:05 2019
+(NCF-2)spa=2.0 mae=0.415366 rmse=0.734671 ucc=2.00 time=Mon Apr 22 15:09:59 2019
+(NCF-2)spa=2.0 mae=0.418198 rmse=0.740665 ucc=2.50 time=Mon Apr 22 15:16:44 2019
+(NCF-2)spa=2.0 mae=0.418739 rmse=0.744614 ucc=3.00 time=Mon Apr 22 15:22:37 2019
+(NCF-2)spa=2.0 mae=0.423397 rmse=0.745249 ucc=3.50 time=Mon Apr 22 15:30:39 2019
+
+(NCF-2)spa=2.0 mae=0.415662 rmse=0.734387 ucc=1.05 time=Mon Apr 22 15:49:19 2019
+(NCF-2)spa=2.0 mae=0.415742 rmse=0.736015 ucc=1.10 time=Mon Apr 22 15:53:51 2019
+(NCF-2)spa=2.0 mae=0.416956 rmse=0.735993 ucc=1.30 time=Mon Apr 22 15:58:53 2019
+(NCF-2)spa=2.0 mae=0.414411 rmse=0.736376 ucc=1.50 time=Mon Apr 22 16:04:25 2019
+(NCF-2)spa=2.0 mae=0.415282 rmse=0.734521 ucc=2.00 time=Mon Apr 22 16:10:09 2019
+(NCF-2)spa=2.0 mae=0.417507 rmse=0.739809 ucc=2.50 time=Mon Apr 22 16:17:24 2019
+(NCF-2)spa=2.0 mae=0.417601 rmse=0.740190 ucc=3.00 time=Mon Apr 22 16:24:56 2019
+(NCF-2)spa=2.0 mae=0.420252 rmse=0.742290 ucc=3.50 time=Mon Apr 22 16:32:32 2019
+
+sm3.0
+(NCF-2)spa=2.0 mae=0.424574 rmse=0.747187 ucc=1.05 time=Mon Apr 22 16:45:31 2019
+(NCF-2)spa=2.0 mae=0.424093 rmse=0.747135 ucc=1.10 time=Mon Apr 22 16:51:20 2019
+(NCF-2)spa=2.0 mae=0.426354 rmse=0.751319 ucc=1.30 time=Mon Apr 22 16:58:46 2019
+(NCF-2)spa=2.0 mae=0.423230 rmse=0.746050 ucc=1.50 time=Mon Apr 22 17:06:19 2019
+(NCF-2)spa=2.0 mae=0.421909 rmse=0.744480 ucc=2.00 time=Mon Apr 22 17:13:32 2019
+(NCF-2)spa=2.0 mae=0.423095 rmse=0.745736 ucc=2.50 time=Mon Apr 22 17:21:37 2019
+(NCF-2)spa=2.0 mae=0.427931 rmse=0.750846 ucc=3.00 time=Mon Apr 22 17:30:22 2019
+(NCF-2)spa=2.0 mae=0.427268 rmse=0.747795 ucc=3.50 time=Mon Apr 22 17:39:49 2019
+
+
+(NCF-2)spa=2.0 mae=0.392522 rmse=0.685698 ucc=1 time=Mon Apr 22 20:14:41 2019
+(NCF-2)spa=5.0 mae=0.375946 rmse=0.677985 ucc=1 time=Mon Apr 22 20:39:35 2019
+(NCF-2)spa=10.0 mae=0.358455 rmse=0.648524 ucc=1 time=Mon Apr 22 21:36:45 2019
+(NCF-2)spa=2.0 mae=0.388829 rmse=0.681719 ucc=2 time=Mon Apr 22 21:41:12 2019
+(NCF-2)spa=5.0 mae=0.371744 rmse=0.671153 ucc=2 time=Mon Apr 22 22:01:15 2019
+(NCF-2)spa=10.0 mae=0.348119 rmse=0.631934 ucc=2 time=Mon Apr 22 23:11:32 2019
+(NCF-2)spa=2.0 mae=0.387070 rmse=0.677904 ucc=4 time=Mon Apr 22 23:17:02 2019
+(NCF-2)spa=5.0 mae=0.368971 rmse=0.667244 ucc=4 time=Mon Apr 22 23:38:40 2019
+(NCF-2)spa=10.0 mae=0.338165 rmse=0.618950 ucc=4 time=Tue Apr 23 00:47:56 2019
+(NCF-2)spa=2.0 mae=0.386192 rmse=0.677592 ucc=6 time=Tue Apr 23 00:53:23 2019
+(NCF-2)spa=5.0 mae=0.367252 rmse=0.665368 ucc=6 time=Tue Apr 23 01:22:51 2019
+(NCF-2)spa=10.0 mae=0.337918 rmse=0.619189 ucc=6 time=Tue Apr 23 02:37:23 2019
+(NCF-2)spa=2.0 mae=0.388563 rmse=0.681391 ucc=8 time=Tue Apr 23 02:44:02 2019
+(NCF-2)spa=5.0 mae=0.365597 rmse=0.662954 ucc=8 time=Tue Apr 23 03:15:28 2019
+(NCF-2)spa=10.0 mae=0.338619 rmse=0.619650 ucc=8 time=Tue Apr 23 04:44:54 2019
+(NCF-2)spa=2.0 mae=0.389310 rmse=0.684039 ucc=12 time=Tue Apr 23 04:53:57 2019
+(NCF-2)spa=5.0 mae=0.363651 rmse=0.658761 ucc=12 time=Tue Apr 23 05:30:21 2019
+(NCF-2)spa=10.0 mae=0.333419 rmse=0.612623 ucc=12 time=Tue Apr 23 07:09:20 2019
+(NCF-2)spa=2.0 mae=0.390092 rmse=0.684546 ucc=16 time=Tue Apr 23 07:21:55 2019
+(NCF-2)spa=5.0 mae=0.363438 rmse=0.660641 ucc=16 time=Tue Apr 23 08:09:44 2019
+(NCF-2)spa=2.0 mae=0.399288 rmse=0.701360 ucc=20 time=Tue Apr 23 09:34:03 2019
+(NCF-2)spa=5.0 mae=0.367312 rmse=0.666498 ucc=20 time=Tue Apr 23 09:40:17 2019
+(NCF-2)spa=2.0 mae=0.395245 rmse=0.697876 ucc=32 time=Tue Apr 23 09:42:59 2019
+(NCF-2)spa=5.0 mae=0.363809 rmse=0.661424 ucc=32 time=Tue Apr 23 09:52:18 2019
+
+
+(NCF-2)spa=2.0 mae=0.444309 rmse=0.756505 ucc=1 time=Tue Apr 23 10:11:17 2019
+(NCF-2)spa=5.0 mae=0.381872 rmse=0.685787 ucc=1 time=Tue Apr 23 10:19:35 2019
+(NCF-2)spa=10.0 mae=0.347900 rmse=0.635930 ucc=1 time=Tue Apr 23 10:38:15 2019
+(NCF-2)spa=2.0 mae=0.432623 rmse=0.736538 ucc=2 time=Tue Apr 23 10:40:29 2019
+(NCF-2)spa=5.0 mae=0.375691 rmse=0.676256 ucc=2 time=Tue Apr 23 10:51:12 2019
+(NCF-2)spa=10.0 mae=0.342021 rmse=0.627416 ucc=2 time=Tue Apr 23 11:11:59 2019
+(NCF-2)spa=2.0 mae=0.421940 rmse=0.729234 ucc=4 time=Tue Apr 23 11:14:22 2019
+(NCF-2)spa=5.0 mae=0.373970 rmse=0.675779 ucc=4 time=Tue Apr 23 11:23:47 2019
+(NCF-2)spa=10.0 mae=0.342476 rmse=0.627889 ucc=4 time=Tue Apr 23 11:44:25 2019
+(NCF-2)spa=2.0 mae=0.422898 rmse=0.731432 ucc=6 time=Tue Apr 23 11:48:07 2019
+(NCF-2)spa=5.0 mae=0.369389 rmse=0.667993 ucc=6 time=Tue Apr 23 11:56:50 2019
+(NCF-2)spa=10.0 mae=0.341181 rmse=0.626374 ucc=6 time=Tue Apr 23 12:17:45 2019
+(NCF-2)spa=2.0 mae=0.406686 rmse=0.717901 ucc=8 time=Tue Apr 23 12:20:40 2019
+(NCF-2)spa=5.0 mae=0.367604 rmse=0.668721 ucc=8 time=Tue Apr 23 12:30:15 2019
+(NCF-2)spa=10.0 mae=0.340965 rmse=0.625636 ucc=8 time=Tue Apr 23 12:56:50 2019
+(NCF-2)spa=2.0 mae=0.399984 rmse=0.706340 ucc=12 time=Tue Apr 23 13:00:35 2019
+(NCF-2)spa=5.0 mae=0.368805 rmse=0.665390 ucc=12 time=Tue Apr 23 13:15:25 2019
+(NCF-2)spa=10.0 mae=0.340891 rmse=0.626768 ucc=12 time=Tue Apr 23 13:48:42 2019
+(NCF-2)spa=2.0 mae=0.394920 rmse=0.699016 ucc=16 time=Tue Apr 23 13:52:13 2019
+(NCF-2)spa=5.0 mae=0.366416 rmse=0.667827 ucc=16 time=Tue Apr 23 14:04:40 2019
+(NCF-2)spa=10.0 mae=0.339369 rmse=0.624344 ucc=16 time=Tue Apr 23 14:34:32 2019
+(NCF-2)spa=2.0 mae=0.396216 rmse=0.700228 ucc=20 time=Tue Apr 23 14:38:30 2019
+(NCF-2)spa=5.0 mae=0.362743 rmse=0.658904 ucc=20 time=Tue Apr 23 14:53:23 2019
+(NCF-2)spa=10.0 mae=0.338874 rmse=0.622662 ucc=20 time=Tue Apr 23 15:34:11 2019
+(NCF-2)spa=2.0 mae=0.388330 rmse=0.690208 ucc=32 time=Tue Apr 23 15:38:29 2019
+(NCF-2)spa=5.0 mae=0.362149 rmse=0.661847 ucc=32 time=Tue Apr 23 15:54:59 2019

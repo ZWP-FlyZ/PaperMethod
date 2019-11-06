@@ -13,8 +13,6 @@ from tools import SysCheck
 from autoencoder.ModelClass import DenoiseAutoEncoder,MF_bl_ana,CF;
 import pickle as pk;
 import random;
-from tools.LoadLocation import loadLocation
-from autoencoder.keras_mfbl import batch_size
 from tools.fwrite import fwrite_append
 
 

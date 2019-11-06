@@ -23,12 +23,12 @@ base_path = r'E:/work';
 if SysCheck.check()=='l':
     base_path='/home/zwp/work'
     
-origin_data_path = base_path+'/Dataset/ws/rtmatrix.txt';
-train_output_path = base_path+'/Dataset/ws/train_n'
-test_output_path = base_path+'/Dataset/ws/test_n'
+origin_data_path = base_path+'/Dataset/ws/tpmatrix.txt';
+train_output_path = base_path+'/Dataset/ws/train_tp'
+test_output_path = base_path+'/Dataset/ws/test_tp'
 
-spa_list=[5];
-case_cout=15;
+spa_list=[5,10,15,20];
+case_cout=10;
 replace_param=[-1,-1];
 
 

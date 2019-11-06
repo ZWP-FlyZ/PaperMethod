@@ -26,10 +26,16 @@ from tools import fwrite;
 base_path = r'E:/work';
 if SysCheck.check()=='l':
     base_path='/home/zwp/work';
-origin_path = base_path+'/Dataset/ws/rtmatrix.txt';
+    
+# origin_path = base_path+'/Dataset/ws/rtmatrix.txt';
+# user_info_path=base_path+'/Dataset/ws/localinfo/user_info.txt';
+# user_info_more_path=base_path+'/Dataset/ws/localinfo/user_info_more.txt';
+# fcm_w_out = base_path+'/Dataset/ws/localinfo/user_fcm_w.txt';
+
+origin_path = base_path+'/Dataset/ws/tpmatrix.txt';
 user_info_path=base_path+'/Dataset/ws/localinfo/user_info.txt';
 user_info_more_path=base_path+'/Dataset/ws/localinfo/user_info_more.txt';
-fcm_w_out = base_path+'/Dataset/ws/localinfo/user_fcm_w.txt';
+fcm_w_out = base_path+'/Dataset/ws/localinfo/user_fcm_w_tp.txt';
 
 
 '''
@@ -261,7 +267,7 @@ def run():
     data=[];
     names=[];
     area=[];
-    k=128;
+    k=6;
     for uid in range(339):
         un = user_loc[uid][1];
         names.append(un);
@@ -277,7 +283,7 @@ def run():
 
     # 1.2-1.3
     fcm = Fcm(k,1.7);
-    cent,res = fcm.train(data, max_loop=100, max_e=0.00001,di=1)
+    cent,res = fcm.train(data, max_loop=100, max_e=0.00001,di=2.5)
 
 #     cent,res = simple_km2(data,k,k);
     
@@ -300,7 +306,7 @@ def run():
     pass;
 
 
-def run_out(ck):
+def run_out(ck,um):
     
     user_loc = localload.load_userinfo(user_info_path)
     user_loc_m = localload.load_locmore(user_info_more_path);
@@ -336,7 +342,7 @@ def run_out(ck):
     data=np.array(data);
 
     # 1.2-1.3
-    fcm = Fcm(k,1.7);
+    fcm = Fcm(k,um);
     cent,res = fcm.train(data, max_loop=100, max_e=0.00001,di=1)
 
 #     cent,res = simple_km2(data,k,k);

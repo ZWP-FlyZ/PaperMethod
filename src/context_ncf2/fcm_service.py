@@ -27,13 +27,16 @@ from content_ncf import localtools;
 base_path = r'E:/work';
 if SysCheck.check()=='l':
     base_path='/home/zwp/work';
-origin_path = base_path+'/Dataset/ws/rtmatrix.txt';
+# origin_path = base_path+'/Dataset/ws/rtmatrix.txt';
+# ser_info_path=base_path+'/Dataset/ws/localinfo/ws_info.txt';
+# ser_info_more_path=base_path+'/Dataset/ws/localinfo/ws_info_more.txt';
+# fcm_w_out = base_path+'/Dataset/ws/localinfo/service_fcm_w.txt';
+
+
+origin_path = base_path+'/Dataset/ws/tpmatrix.txt';
 ser_info_path=base_path+'/Dataset/ws/localinfo/ws_info.txt';
 ser_info_more_path=base_path+'/Dataset/ws/localinfo/ws_info_more.txt';
-fcm_w_out = base_path+'/Dataset/ws/localinfo/service_fcm_w.txt';
-
-
-
+fcm_w_out = base_path+'/Dataset/ws/localinfo/service_fcm_w_tp.txt';
 
 
 '''
@@ -267,7 +270,7 @@ def run():
     data=[];
     names=[];
     area=[];
-    k=8;
+    k=16;
     for sid in range(5825):
         sn = ser_loc[sid][1];
         names.append(sn);
@@ -282,6 +285,65 @@ def run():
     data=np.array(data);
 
     fcm = Fcm(k,1.7);
+    cent,res = fcm.train(data, max_loop=100, max_e=0.001,di=2.5)
+    
+    print(cent);
+    print(res);
+    np.savetxt(fcm_w_out, fcm.U, '%.6f');
+    
+    
+    for i in range(k):
+        tmp=[];
+        tmp2=[];
+        for id in res[i]:
+            if names[id] not in tmp2:
+                tmp2.append(names[id]);
+                tmp.append(area[id]);
+        print(tmp)
+        print(tmp2);
+        print();
+        
+    pass;
+
+
+def run_out(sk,sm):
+    
+    ser_loc = localload.load(ser_info_path);
+    ser_loc_m = localload.load_locmore(ser_info_more_path);
+    R = np.loadtxt(origin_path,np.float);
+    
+    if os.path.isfile(fcm_w_out):
+        os.remove(fcm_w_out);
+
+    idx = np.where(R<0);
+    R[idx]=0;
+
+    service_sum = np.sum(R,axis=0);
+    service_cot = np.count_nonzero(R, axis=0);
+    service_mean = np.divide(service_sum,service_cot,
+        out=np.zeros_like(service_sum),where=service_cot!=0);
+    all_mean = np.sum(service_sum)/np.sum(service_cot);
+    service_mean[np.where(service_cot==0)] = all_mean;
+
+    
+    data=[];
+    names=[];
+    area=[];
+    k=sk;
+    for sid in range(5825):
+        sn = ser_loc[sid][1];
+        names.append(sn);
+        area.append(ser_loc_m[sn][0])
+        lc = [];
+        lc.extend(ser_loc_m[sn][1]);
+        # 添加ip
+        lc.extend(ser_loc[sid][2][:2]);
+        lc.append(service_mean[sid]);
+
+        data.append(lc);
+    data=np.array(data);
+
+    fcm = Fcm(k,sm);
     cent,res = fcm.train(data, max_loop=100, max_e=0.001,di=1)
     
     print(cent);
@@ -301,6 +363,7 @@ def run():
         print();
         
     pass;
+
 
 if __name__ == '__main__':
     run();

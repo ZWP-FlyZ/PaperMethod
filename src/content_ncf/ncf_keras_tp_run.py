@@ -23,24 +23,24 @@ if SysCheck.check()=='l':
 origin_data = base_path+'/rtdata.txt';
 
 
-spas = [3];
-case = [1];
+spas = [5,10,15,20];
+case = [1,2];
 
 def run(spa,case):
-    train_path = base_path+'/Dataset/ws/train_n/sparseness%.1f/training%d.txt'%(spa,case);
-    test_path = base_path+'/Dataset/ws/test_n/sparseness%.1f/test%d.txt'%(spa,case);
-    cache_path = base_path+'/Dataset/ncf_values/spa%.1f_case%d.h5'%(spa,case);
-    result_file= './result/ws_spa%.1f_case%d.txt'%(spa,case);
+    train_path = base_path+'/Dataset/ws/train_tp/sparseness%.1f/training%d.txt'%(spa,case);
+    test_path = base_path+'/Dataset/ws/test_tp/sparseness%.1f/test%d.txt'%(spa,case);
+    cache_path = base_path+'/Dataset/context_ncf_tp_values/spa%.1f_case%d.h5'%(spa,case);
+    result_file= './result/tp_ws_spa%.1f_case%d.txt'%(spa,case);
     dbug_paht = 'E:/work/Dataset/wst64/rtdata1.txt';
     
-    loc_classes = base_path+'/Dataset/ws/localinfo/ws_content_classif_out.txt';
+
     
     print('开始实验，稀疏度=%.1f,case=%d'%(spa,case));
     print ('加载训练数据开始');
     now = time.time();
     trdata = np.loadtxt(train_path, dtype=float);
-    ser_class = localtools.load_classif(loc_classes);
-    classiy_size = len(ser_class);
+#     ser_class = localtools.load_classif(loc_classes);
+#     classiy_size = len(ser_class);
     n = np.alen(trdata);
     print ('加载训练数据完成，耗时 %.2f秒，数据总条数%d  \n'%((time.time() - now),n));
     
@@ -92,7 +92,7 @@ def run(spa,case):
         
     tp.train_data=trdata;
     tp.test_data=ttrdata;
-    tp.epoch=30;
+    tp.epoch=20;
     tp.batchsize=5;
     '''
     Adagrad lr 0.03 zui hao
@@ -111,7 +111,7 @@ def run(spa,case):
     tp.umean=umean;
     tp.smean=smean;
     
-    
+    # 注意更改了del_non -1的数值
     print ('训练模型开始');
     tnow = time.time();
     model = simple_ncf(cp);

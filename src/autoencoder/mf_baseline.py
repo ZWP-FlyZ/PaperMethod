@@ -121,7 +121,7 @@ def mf_base_run(spa,case):
     tnow = time.time();
     tx = us_shape[0];
 
-    svd = MFS.MF_bl_ana(R.shape,f,mean);
+    svd = MFS.MF_bl_ana(R.shape,f,mean); 
 
     if loadvalues and svd.exisValues(values_path):
         svd.preloadValues(values_path);

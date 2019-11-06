@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 2019年1月7日
+Created on 2019年2月16日
 
-@author: zwp
+@author: zwp12
 '''
+
 
 import numpy as np;
 import time;
@@ -11,10 +12,9 @@ import math;
 import os;
 from tools import SysCheck;
 
-from content_ncf.ncf_param import NcfTraParm,NcfCreParam;
-from content_ncf.ncf_models import simple_ncf,simple_ncf_pp,simple_ncf_bl;
+from context_ncf2.ncf_param import NcfTraParm,NcfCreParam;
+from context_ncf2.ncf_models import *;
 from tools.fwrite import fwrite_append
-from content_ncf import localtools;
 
 
 base_path = r'E:/work';
@@ -23,24 +23,26 @@ if SysCheck.check()=='l':
 origin_data = base_path+'/rtdata.txt';
 
 
-spas = [3];
-case = [1];
+spas = [5];
+case = [1,2,3,4,5];
 
 def run(spa,case):
-    train_path = base_path+'/Dataset/ws/train_n/sparseness%.1f/training%d.txt'%(spa,case);
-    test_path = base_path+'/Dataset/ws/test_n/sparseness%.1f/test%d.txt'%(spa,case);
-    cache_path = base_path+'/Dataset/ncf_values/spa%.1f_case%d.h5'%(spa,case);
-    result_file= './result/ws_spa%.1f_case%d.txt'%(spa,case);
+    train_path = base_path+'/Dataset/ws/train_tp/sparseness%.1f/training%d.txt'%(spa,case);
+    test_path = base_path+'/Dataset/ws/test_tp/sparseness%.1f/test%d.txt'%(spa,case);
+    cache_path = base_path+'/Dataset/context_ncf_tp_values/spa%.1f_case%d.h5'%(spa,case);
+    result_file= './result/tp_ws_spa%.1f_case%d.txt'%(spa,case);
     dbug_paht = 'E:/work/Dataset/wst64/rtdata1.txt';
     
-    loc_classes = base_path+'/Dataset/ws/localinfo/ws_content_classif_out.txt';
+    
+    user_fcm_w_path = base_path+'/Dataset/ws/localinfo/user_fcm_w_tp.txt';
+    service_fcm_w_path = base_path+'/Dataset/ws/localinfo/service_fcm_w_tp.txt';
     
     print('开始实验，稀疏度=%.1f,case=%d'%(spa,case));
     print ('加载训练数据开始');
     now = time.time();
     trdata = np.loadtxt(train_path, dtype=float);
-    ser_class = localtools.load_classif(loc_classes);
-    classiy_size = len(ser_class);
+    user_fcm_w = np.loadtxt(user_fcm_w_path, dtype=float);
+    service_fcm_w = np.loadtxt(service_fcm_w_path, dtype=float);
     n = np.alen(trdata);
     print ('加载训练数据完成，耗时 %.2f秒，数据总条数%d  \n'%((time.time() - now),n));
     
@@ -62,6 +64,7 @@ def run(spa,case):
     cp = NcfCreParam();
     tp = NcfTraParm();
     cp.us_shape=(339,5825);
+    cp.clu_num=(user_fcm_w.shape[1],service_fcm_w.shape[1]);
     cp.hid_feat=16;
     cp.hid_units=[32,16];
     cp.drop_p=0
@@ -72,8 +75,8 @@ def run(spa,case):
     u = trdata[:,0].astype(np.int32);
     s = trdata[:,1].astype(np.int32);
     R[u,s]=trdata[:,2];
-    umean = np.sum(R,axis=1)/np.count_nonzero(R, axis=1);
-    smean = np.sum(R,axis=0)/np.count_nonzero(R, axis=0);
+    umean = None;
+    smean = None;
     R[np.where(R>0)]=1.0;
 #     print(umean);
 #     print(smean);
@@ -100,7 +103,7 @@ def run(spa,case):
     
     '''
     
-    tp.learn_rate=0.03;
+    tp.learn_rate=0.02;
     tp.lr_decy_rate=1.0
     tp.lr_decy_step=int(n/tp.batch_size);
     tp.cache_rec_path=cache_path;
@@ -110,11 +113,12 @@ def run(spa,case):
     tp.us_invked= R;
     tp.umean=umean;
     tp.smean=smean;
+    tp.fcm_ws=(user_fcm_w,service_fcm_w);
     
     
     print ('训练模型开始');
     tnow = time.time();
-    model = simple_ncf(cp);
+    model = context_ncf(cp);
     
     mae,nmae = model.train(tp);
                      
@@ -133,10 +137,6 @@ if __name__ == '__main__':
                 s+=mae;
                 s2+=nmae;
                 cot+=1;
-        out_s = '(NCF-FEAT)spa=%.1f mae=%.6f nmae=%.6f time=%s'%(sp,s/cot,s2/cot,time.asctime());
+        out_s = '(NCF-2)spa=%.1f mae=%.6f nmae=%.6f time=%s'%(sp,s/cot,s2/cot,time.asctime());
         print(out_s);
         fwrite_append('./simple_ncf.txt',out_s);
-            
-            
-            
-            

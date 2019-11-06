@@ -120,6 +120,9 @@ class HidFeatLayer(Layer):
         return (input_shape[0], self.output_dim)
 
 
+def root_mean_squared_error(y_true, y_pred):
+        return K.sqrt(K.mean(K.square(y_pred - y_true))) 
+
 class simple_ncf():
     '''
     由keras实现的ncf模型
@@ -199,7 +202,7 @@ class simple_ncf():
         
         # early stop回调
         ear_stop = keras.callbacks.EarlyStopping(monitor='val_mean_absolute_error',
-                            min_delta=0.0002,patience=10); 
+                            min_delta=0.0002,patience=4); 
         #save回调
         chkpoint = ModelCheckpoint(load_path, monitor='val_mean_absolute_error', 
                                    save_best_only=False,
@@ -213,15 +216,16 @@ class simple_ncf():
                                    
         ncf_model.compile(optimizer=Adagrad(lr), 
               loss='mae', 
-              metrics=['mae']);
+              metrics=['mae',root_mean_squared_error]);
         
         his = ncf_model.fit(train_x,train_y,
                       batch_size=bs,epochs=epoch,
                       validation_data = test_data,
-                      callbacks=[chkpoint,myhis,ear_stop],
-                      verbose=0);
+                      callbacks=[myhis,ear_stop],
+                      verbose=1);
         val_rec = his.history['val_mean_absolute_error'];
-        return min(val_rec),0;
+        val_rec2 = his.history['val_root_mean_squared_error'];
+        return min(val_rec),min(val_rec2);
         pass;
                            
 class simple_ncf_pp():

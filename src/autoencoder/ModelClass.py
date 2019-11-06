@@ -247,7 +247,7 @@ class DenoiseAutoEncoder:
         self.values['b2']=b2;
         self.values['w2']=w2;        
         self.values['b1']=b1;
-        self.values['w1']=w1;
+        self.values['w1']=w1; 
                         
 
     def train(self,X,extX,valR=None,learn_param=[0.01,1,1.0],repeat=1,save_path=None,mask_value=0,weight_list=None):

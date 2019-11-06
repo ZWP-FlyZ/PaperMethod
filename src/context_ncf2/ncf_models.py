@@ -97,6 +97,7 @@ def root_mean_squared_error(y_true, y_pred):
         return K.sqrt(K.mean(K.square(y_pred - y_true))) 
 
 
+
 class context_ncf():
     '''
     由keras实现的ncf模型,输入包含u,s 和uw,sw
@@ -224,6 +225,8 @@ class context_ncf():
         val_rec2 = his.history['val_root_mean_squared_error'];
         return min(val_rec),min(val_rec2);
         pass;
+
+
 
 class context_ncf_bais():
     '''

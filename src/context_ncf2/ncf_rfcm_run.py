@@ -15,7 +15,7 @@ from tools import SysCheck;
 from context_ncf2.ncf_param import NcfTraParm,NcfCreParam;
 from context_ncf2.ncf_models import *;
 from tools.fwrite import fwrite_append
-from context_ncf2 import fcm_user;
+from context_ncf2 import fcm_user,fcm_service
 
 base_path = r'E:/work';
 if SysCheck.check()=='l':
@@ -23,8 +23,10 @@ if SysCheck.check()=='l':
 origin_data = base_path+'/rtdata.txt';
 
 
-spas = [2];
+spas = [2,5,10];
 case = [1,2];
+
+kkk=0;
 
 def run(spa,case):
     train_path = base_path+'/Dataset/ws/train_n/sparseness%.1f/training%d.txt'%(spa,case);
@@ -67,7 +69,7 @@ def run(spa,case):
     cp.us_shape=(339,5825);
     cp.clu_num=(user_fcm_w.shape[1],service_fcm_w.shape[1]);
     cp.hid_feat=16;
-    cp.hid_feat2=16;
+    cp.hid_feat2=kkk;
     cp.hid_units=[32,16];
     cp.drop_p=0
     cp.reg_p=0
@@ -142,27 +144,62 @@ if __name__ == '__main__':
 #         out_s = '(NCF-2)spa=%.1f mae=%.6f rmse=%.6f time=%s'%(sp,s/cot,s2/cot,time.asctime());
 #         print(out_s);
 #         fwrite_append('./simple_rfcm_ncf.txt',out_s);
-        
-        
-    ########### User clusture #############
     
-    
-    userclust=[1,2,4,8,16,32,64,128]
-    for ucc in userclust:
-        fcm_user.run_out(ucc);
+    kkks=[1,2,4,6,8,12,16,20,32]
+    for ucc in kkks:
+        kkk = ucc;
         for sp in spas:
             s = 0;s2=0;cot=0;
             for ca in case:
                 for i in range(1):
                     mae,nmae = run(sp,ca);
+                    if(mae>0.6):continue;
                     s+=mae;
                     s2+=nmae;
                     cot+=1;
-            out_s = '(NCF-2)spa=%.1f mae=%.6f rmse=%.6f ucc=%d time=%s'%(sp,s/cot,s2/cot,ucc,time.asctime());
+            out_s = '(NCF-2)spa=%.1f mae=%.6f rmse=%.6f ucc=%d time=%s'%(sp,s/cot,s2/cot,kkk,time.asctime());
             print(out_s);
             fwrite_append('./simple_rfcm_ncf.txt',out_s);
     
+    
         
+        
+    ########### User clusture #############
+    
+#     userclust=[1,2,4,8,16,32,64,128]
+#     for ucc in userclust:
+#         fcm_user.run_out(ucc,1.7);
+#         for sp in spas:
+#             s = 0;s2=0;cot=0;
+#             for ca in case:
+#                 for i in range(1):
+#                     mae,nmae = run(sp,ca);
+#                     s+=mae;
+#                     s2+=nmae;
+#                     cot+=1;
+#             out_s = '(NCF-2)spa=%.1f mae=%.6f rmse=%.6f ucc=%d time=%s'%(sp,s/cot,s2/cot,ucc,time.asctime());
+#             print(out_s);
+#             fwrite_append('./simple_rfcm_ncf.txt',out_s);
+    
+    ########### User service m #############
+    
+#     setm=[1.05,1.1,1.3,1.5,2.0,2.5,3.0,3.5]
+# #     setm=[2.5,3.5]
+#     fcm_service.run_out(32,3.0);
+#     for ucc in setm:
+#         for sp in spas:
+#             s = 0;s2=0;cot=0;
+#             for i in range(2):
+#                 fcm_user.run_out(16,ucc);
+#                 for ca in case:
+#                     mae,nmae = run(sp,ca);
+#                     if(mae>0.6):continue;
+#                     s+=mae;
+#                     s2+=nmae;
+#                     cot+=1;
+#             out_s = '(NCF-2)spa=%.1f mae=%.6f rmse=%.6f ucc=%.2f time=%s'%(sp,s/cot,s2/cot,ucc,time.asctime());
+#             print(out_s);
+#             fwrite_append('./simple_rfcm_ncf.txt',out_s);        
         
         
         
